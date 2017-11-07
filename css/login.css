@@ -1,0 +1,25 @@
+@media (min-width: 0px){
+    .login-top{
+        margin-top: 14vh;
+    }
+}
+@media (min-width: 480px){
+    .login-top{
+        margin-top: 16vh;
+    }
+}
+@media (min-width: 992px){
+    .login-top{
+        margin-top: 17vh;
+    }
+}
+@media (min-width: 1280px){
+    .login-top{
+        margin-top: 10vh;
+    }
+}
+@media (min-width: 1400px){
+    .login-top{
+        margin-top: 18vh;
+    }
+}

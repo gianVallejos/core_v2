@@ -1,0 +1,9 @@
+@media print{
+    #data-agenda{
+        display: none;
+    }
+    
+    a{
+        font-weight: normal;
+    }    
+}

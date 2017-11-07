@@ -1,0 +1,232 @@
+body{
+    /*background-color: #19396c;*/
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    background-color: #ececec;
+}
+/*
+footer{
+    position: relative;
+    color: #999;
+
+}*/
+
+#app{
+    min-height: 96vh;
+}
+
+.lbl{
+    padding-top: 5px;
+}
+
+/*-------------------- CORE STYLE --------------------- */
+.title{
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+}
+
+.bd-b-1{
+    border: 1px solid black;
+}
+
+.btn-core{
+    padding: 6px 17px 6px 17px;
+    border-radius: 4px;
+    color: #FFF;
+    font-size: 16px;
+    background-color: #00896E;
+    border: none;
+}
+
+.btn-core a{
+    color: #FFF;
+    text-decoration: none;
+}
+
+.btn-core:hover{
+    background-color: #00766E;
+    border: none;
+    color: #FFF;
+}
+
+.btn-core.focus, .btn-core:focus, .btn-core:hover{
+    background-color: #00766E;
+    border: none;
+    color: #FFF;
+}
+
+.btn-link{
+    color: #00896E;
+}
+
+.btn-core-navegation {
+    background-color: #87B0FF;
+    color: #000;
+    font-weight: bold;
+    border: 0px;
+    border-radius: 5px;
+    padding: 25px;
+    box-shadow: 5px 5px 1px #2e3b54;
+    transition-duration: 0.4s;
+}
+
+.btn-core-navegation:hover {
+    background-color: #87B0FF;
+    color: #000;
+    font-weight: bold;
+    border: 0px;
+    border-radius: 5px;
+    padding: 25px;
+    box-shadow: 3px 3px 1px #2e3b54;
+    opacity: 0.6;
+
+}
+
+/*-------------------- NAVBAR CSS --------------------- */
+.navbar-default{
+    background-color: #19396c;
+    border: none;
+}
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-text{
+    color: #FFF;
+    font-weight: normal;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+    background-color: #19396c;
+    color: #87b0ff;
+    /*color: #FFF;*/
+    font-weight: bold;
+}
+.navbar-fixed-bottom, .navbar-fixed-top, .navbar-static-top{
+    /*height: 82px;*/
+}
+.navbar-default .navbar-nav>li>a:hover{
+    color: #87b0ff;
+}
+.navbar-brand>img{
+    margin-top: -13px;
+}
+.navbar-brand>img:hover{
+    opacity: 0.8;
+}
+
+.dropdown-menu{
+  background-color: #19396c;
+  border-radius: 4px;
+  box-shadow: none;
+  border: 1px solid rgba(0,0,0,.15);
+  border-top: none;
+}
+
+.dropdown-menu>li>a{
+    color: #FFF;
+}
+
+.dropdown-menu>li>a:hover{
+
+    background-color: #87b0ff;
+}
+
+/*---------------- PANEL STYLE ------------------ */
+.panel, .panel-default>.panel-heading{
+    background-color: rgb(255, 255, 255);
+}
+
+.panel{
+    border: 0;
+}
+
+.panel-default>.panel-heading{
+    background-image: url('../images/panel-icon.png');
+    background-position: 15px 5px;
+    background-repeat: no-repeat;
+    background-color: #19396c;
+    color: #FFF;
+}
+
+.panel-body{
+    padding-top: 45px;
+    padding-bottom: 35px;
+    padding-left: 39px;
+}
+
+/*---------------------- PRESUPUESTOS ----------------*/
+.diente{
+    float: right;
+    font-size: 0px;
+}
+
+.diente-2{
+    float: left;
+    font-size: 0px;
+}
+
+.diente-btn{
+    transition-duration: 0.4s;
+    opacity: 1;
+}
+
+.diente-btn:hover{
+    opacity: 0.2;
+}
+
+.presupuesto-form{
+    width: 90px;
+    height: 32px;
+    padding-left: 5px;
+}
+/*--------- HOME --------- */
+.home-block{
+    display: inline-block;
+    padding-right: 25px;
+    padding-bottom: 25px;
+}
+
+/*-------- FOOTER --------*/
+body{
+    position: relative;
+}
+footer{
+    position: absolute;
+    bottom: -38px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: #19396c;
+    padding: 8px 0 8px 0;
+}
+
+footer .texto{
+    color: #FFF;
+    font-size: 13px;
+}
+
+footer .texto .link{
+    color: #FFF;
+}
+
+.form-control-monto{
+    text-align: center;
+}
+
+@media screen and (max-width: 795px){
+  .panel-body{
+      padding-left: 17px;
+  }
+}
+
+#opc1.btn-primary, #opc2.btn-primary{
+    background-color: #19396c;
+}
+
+a.btn-core{
+    padding: 9px 17px 9px 17px;
+}
+
+a.btn-core:hover{
+    text-decoration: none;
+}
+
+.logo-img{
+   width: 100%;
+}
