@@ -88,6 +88,7 @@
                                       <td class="text-center col-md-6">{{ $row->nombre }}</td>
                                       <td class="text-center col-md-2">{{ $row->ruc }}</td>
                                       <td class="text-center"><a href="{{ route('empresas.edit', $row->id) }}" class="btn btn-xs btn-warning">Editar</a></td>
+                                        @if(Auth::user()->rolid == 1)
                                       <td class="text-center">
                                         @if( $i > 2 )
                                         <form action="{{ route('empresas.destroy', $row->id) }}" method="post">
@@ -97,6 +98,7 @@
                                         </form>
                                         @endif
                                       </td>
+                                            @endif
                                     </tr>
                                     <?php $i++; ?>
                                   @endforeach
