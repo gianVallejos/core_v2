@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Ingreso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class IngresoController extends Controller
 {
@@ -20,6 +21,10 @@ class IngresoController extends Controller
     private $path = 'ingreso';
     public function index()
     {
+        if(Auth::user()->rolid != 1){
+            return view('home');
+        }
+
         $ingresos = DB::select('call getAllIngresos()');
         $numIngresos = Ingreso::get()->count();
 

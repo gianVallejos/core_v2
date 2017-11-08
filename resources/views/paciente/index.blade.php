@@ -266,7 +266,7 @@
                                             <th class="text-center">DNI</th>
                                             <th class="text-center">Celular</th>
                                             <th class="text-center">Teléfono</th>
-                                            <th></th>
+                                            <th class="text-center">Empresa</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -280,6 +280,15 @@
                                                 <td class="text-center">{{ $row->dni }}</td>
                                                 <td class="text-center">{{ $row->celular }}</td>
                                                 <td class="text-center">{{ $row->telefono }}</td>
+
+                                                <td class="text-center">
+                                                    @foreach($empresas as $empresa)
+                                                        @if($empresa->id == $row->empresa_id)
+                                                            {{$empresa->nombre}}
+                                                        @endif
+                                                    @endforeach
+                                                </td>
+
                                                 <td class="text-center">
                                                     <button class="btn btn-xs btn-success"
                                                             onclick="mostrarDetallePaciente('{{ json_encode($data[$i]) }}')"

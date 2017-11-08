@@ -124,14 +124,14 @@
                                 <div class="col-md-2 col-xs-2">
                                     <input id="margen_ganancia" type="number" min="0" max="100" class="form-control"
                                            name="margen_ganancia" value="{{ old('margen_ganancia')}}"
-                                           placeholder="Margen (%)">
+                                           placeholder="Margen (%)"
+                                    @if(Auth::user()->rolid != 1) disabled  @endif >
 
                                     @if ($errors->has('margen_ganancia'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('margen_ganancia')}}</strong>
                                     </span>
                                     @endif
-
                                 </div>
 
                             </div>

@@ -127,7 +127,7 @@
                             <div class="col-md-2 col-xs-2">
                                 <select name="empresa_id" id="empresa_id" class="form-control">
                                     @foreach( $empresas as $stdo )
-                                        <option value="{{ $stdo->id }}" {{ $paciente->empresa_id == $stdo->nombre ? 'selected="selected"' : '' }} >{{ $stdo->nombre }}</option>
+                                        <option value="{{ $stdo->id }}" {{ $paciente->empresa_id == $stdo->id ? 'selected="selected"' : '' }} >{{ $stdo->nombre }}</option>
                                     @endforeach
                                 </select>
 
