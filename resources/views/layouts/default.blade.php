@@ -21,7 +21,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css?v=1.0.0') }}" rel="stylesheet">
-    <link href="{{ asset('css/core.css?v=2.0.14') }}" rel="stylesheet">
+    <link href="{{ asset('css/core.css?v=2.0.15') }}" rel="stylesheet">
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('css/table.css?v=1.0.1') }}" rel="stylesheet">
     <link href="{{ asset('sweetalert/sweetalert.css') }}" rel="stylesheet">
@@ -165,13 +165,13 @@
 </div>
 
 <footer>
-    <div class="container">
+    <div class="container no-print">
         <div class="row">
             <div class="col-md-6 col-xs-6 text-left texto">
                 Developed by <a href="http://www.gvallejos.com" class="link" target="_blank" style="color: #87B0FF;">gVallejos.com</a>
             </div>
             <div class="col-md-6 col-xs-6 text-right texto">
-                © 2017 CORE v.2.0.6.
+                © 2017 CORE v.2.0.7.
             </div>
         </div>
     </div>
@@ -179,11 +179,13 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/presupuesto.js?v=1.0.3') }}"></script>
+<script src="{{ asset('js/printThis.js?v=1.0.3') }}"></script>
+<script src="{{ asset('js/presupuesto.js?v=1.0.6') }}"></script>
 <script src="{{ asset('js/precios.js?v=1') }}"></script>
 <script src="{{ asset('js/proveedores.js?v=1.0.1') }}"></script>
 <script src="{{ asset('js/pacientes.js?v=1.0.2') }}"></script>
-<script src="{{ asset('js/ingresos.js?v=1.0.3') }}"></script>
+<script src="{{ asset('js/medicos.js?v=1.0.2') }}"></script>
+<script src="{{ asset('js/ingresos.js?v=1.0.5') }}"></script>
 <script src="{{ asset('sweetalert/sweetalert.min.js') }}"></script>
 
 <!-- Full calendar -->

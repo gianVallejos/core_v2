@@ -288,13 +288,6 @@
                                                         @endif
                                                     @endforeach
                                                 </td>
-                                                <td class="text-center">
-                                                    @foreach($empresas as $empresa)
-                                                        @if($empresa->id == $row->empresa_id)
-                                                            {{$empresa->nombre}}
-                                                        @endif
-                                                    @endforeach
-                                                </td>
 
                                                 <td class="text-center">
                                                     <button class="btn btn-xs btn-success"

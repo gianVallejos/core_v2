@@ -5,12 +5,19 @@ function mostrarDetalleIngreso(php_data){
     $('#fecha-txt').text(data["fecha"]);
     $('#paciente-txt').text(data["pacientes"]);
     $('#doctor-txt').text(data["doctor"]);
-    $('#montoTotal-txt').text('S/ ' + data["monto"]);
-    $('#descripcion-txt').text(data["descripcion"]);
+    $('#cantidad-txt').text(data["cantidad"]);
+    $('#tratamiento-txt').text(data["tratamiento"]);
+
+    $('#montoUnitario-txt').text('S/ ' + data["monto"]);
+
+    mt = round(parseFloat(data["monto"]) * parseFloat(data["cantidad"]));
+    $('#montoTotal-txt').text('S/ ' + mt);
 
     var mg = parseFloat(data["mg"]);
-    var md = parseFloat(data["monto"]) * mg/100;
+    var md = mt * mg/100;
     $('#montoDoctor-txt').text( 'S/ ' + md );
+
+    $('#montoCORE-txt').text('S/ ' + round(mt - md));
 }
 
 $('#form-buscar-ingreso').submit(function(event){
@@ -50,23 +57,26 @@ function agregarATabla(data, table_id){
 
     var rowsContent = '';
     for( var ind = 0; ind < data.length; ind++ ){
-        var montoMedico = round(parseFloat(data[ind]["monto"]) * (parseFloat(data[ind]["mg"])/100));
-        var montoCore = round(parseFloat(data[ind]["monto"]) - montoMedico);
+        var montoTotal = round(parseFloat(data[ind]["monto"]) * parseFloat(data[ind]["cantidad"]));
+        var montoMedico = round(montoTotal * (parseFloat(data[ind]["mg"])/100));
+        var montoCore = round(montoTotal - montoMedico);
         rowsContent  += '<tr>' +
                               '<td scope="row" class="text-center">' + (ind+1) + '</td>' +
-                              '<td class="text-center">' + data[ind]["doctor"] + '</td>' +
+                              '<td class="text-center">'+ data[ind]["fecha"] +'</td>' +
                               '<td class="text-center">' + data[ind]["hc"] + '</td>' +
+                              '<td class="text-center">' + data[ind]["ap_doctor"] + '</td>' +
+                              '<td class="text-center">' + data[ind]["cantidad"] + '</td>' +
+                              '<td class="text-center">' + data[ind]["monto"] +'</td>' +
+                              '<td class="text-center">' + montoTotal +'</td>' +
                               '<td class="text-center">' + montoMedico + '</td>' +
                               '<td class="text-center">' + montoCore + '</td>' +
-                              '<td class="text-center">' + data[ind]["monto"] +'</td>' +
-                              '<td class="text-center">'+ data[ind]["fecha"] +'</td>' +
                               '<td class="text-center"></td>' +
                               '<td class="text-center"></td>' +
                               '<td class="text-center"></td>' +
                         '</tr>';
         mdoc += parseFloat(montoMedico);
         mcore += parseFloat(montoCore);
-        mtotal += parseFloat(data[ind]["monto"]);
+        mtotal += parseFloat(montoTotal);
     }
 
     var tfootContent = '';
@@ -74,12 +84,12 @@ function agregarATabla(data, table_id){
                       '<td class="text-center"></td>' +
                       '<td class="text-center"></td>' +
                       '<td class="text-center"></td>' +
-                      '<td class="text-center"><b>' + round(mdoc) +'</b></td>' +
-                      '<td class="text-center"><b>' + round(mcore) +'</b></td>' +
-                      '<td class="text-center"><b>' + round(mtotal) +'</b></td>' +
                       '<td class="text-center"></td>' +
                       '<td class="text-center"></td>' +
                       '<td class="text-center"></td>' +
+                      '<td class="text-center"><b> S/ ' + round(mtotal) +'</b></td>' +
+                      '<td class="text-center"><b> S/ ' + round(mdoc) +'</b></td>' +
+                      '<td class="text-center"><b> S/ ' + round(mcore) +'</b></td>' +
                       '<td class="text-center"></td>' +
                     '</tr>';
 

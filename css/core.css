@@ -230,3 +230,20 @@ a.btn-core:hover{
 .logo-img{
    width: 100%;
 }
+
+.header-presup-print{
+    display: none;
+    padding-left: 95px; padding-right: 45px;
+}
+
+@media print
+{
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+
+    .header-presup-print{
+        display: inherit;
+    }
+}

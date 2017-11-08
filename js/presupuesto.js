@@ -36,6 +36,9 @@ $('#nuevo-presupuesto').click(function(){
 
 $(document).ready(function(){
     $('.dropdown-toggle').dropdown();
+
+
+
 });
 
 function round(num){

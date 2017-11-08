@@ -37,8 +37,16 @@
 <div id="printSection">
   <div id="header" class="container">
       <div class="row" style="margin-top: 6px; margin-bottom: 15px; color: #000;">
-          <div class="col-md-12 col-xs-12 text-center">
+          <div class="col-md-12 col-xs-12 text-center no-print">
                   <h2><b>PRESUPUESTO N° {{ $nroPresupuesto }}</b></h2>
+          </div>
+          <div class="header-presup-print">
+              <div class="col-md-8 col-xs-8" >
+                <h2><b>PRESUPUESTO N° {{ $nroPresupuesto }}</b></h2>
+              </div>
+              <div class="col-md-4 col-xs-4 text-right">
+                <img src="{{ asset('images/logotipo_brand.png')}}" width="250">
+              </div>
           </div>
       </div>
   </div>
@@ -48,7 +56,7 @@
           <div class="col-md-12">
   <!-- HISTORIA CLÍNICA -->
               <div class="panel panel-default">
-                  <div class="panel-heading text-center title">HISTORIA CLÍNICA</div>
+                  <div class="panel-heading text-center title no-print">HISTORIA CLÍNICA</div>
                   <div class="panel-body" style="padding-bottom: 45px; padding-top: 38px;">
 
                     <div class="row">
@@ -326,7 +334,7 @@
                       <div class="row">
                         <div class="col-md-12">
                           <div class="text-right" style="margin-top: 25px; margin-bottom: 15px;">
-                                <button class="btn btn-default" id="adicionalBtn">Agregar Tratamiento extra </button>
+                                <button class="btn btn-default no-print" id="adicionalBtn">Agregar Tratamiento extra </button>
                           </div>
                         </div>
                       </div>
@@ -383,23 +391,23 @@
                                   <input type="text" class="presupuesto-form" id="total" name="firstname" disabled="true" value="0.0" size="3">
                               </div>
                           </div>
-
-                          <!-- BOTONES -->
-                          <div class="col-md-12 col-xs-12 text-center" style="margin-top: 25px;">
-                              <button id="nuevo" class="btn btn-primary">Nuevo</button>
-                              <button id="guardar" class="btn btn-primary">Guardar</button>
-                              <button id="imprimir" onclick="window.print()" class="btn btn-primary">Imprimir</button>
-                              <button id="cerrar" class="btn btn-primary">Regresar</button>
-                          </div>
                       </div>
-
+                      <!-- BOTONES -->
+                      <div class="col-md-12 col-xs-12 text-center" style="margin-top: 25px;">
+                          <button id="nuevo" class="btn btn-primary no-print">Nuevo</button>
+                          <button id="guardar" class="btn btn-primary no-print">Guardar</button>
+                          <button id="imprimir" onclick="window.print()" class="btn btn-primary no-print">Imprimir</button>
+                          <button id="cerrar" class="btn btn-primary no-print">Regresar</button>
+                      </div>
                   </div>
+                </div>
+
               </div>
+            </div>
 
           </div>
       </div>
-  </div>
-</div>
+
 
 <!-- MODAL PRECIOS -->
 <div id="mostrarmodal" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="false">
@@ -453,6 +461,7 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script type="text/javascript">
 
+
     $(document).ready(function(){
         var idDoctor, idPaciente, nroPresupuesto, fechahora, descuento;
         var montoTotal = 0;
@@ -462,6 +471,7 @@
         var eliminar = 1;
         var modificar = 0;
         var opc_actual = 1;
+
 
         $('#nuevo').click(function(){
               swal({
@@ -481,6 +491,7 @@
                     }
             });
         });
+
 
         $('#cerrar').click(function(){
             window.location.href = "/core_v2/presupuestos";
@@ -578,6 +589,8 @@
         $('#adicionalBtn').click(function(){
             accionModal(0);
         });
+
+
 
         $('#opc1').click(function(){ //FALTA VALIDAR SI SON MODIFICAR
             opc_actual = 1;

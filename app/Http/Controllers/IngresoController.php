@@ -59,7 +59,9 @@ class IngresoController extends Controller
             $ingreso = new Ingreso();
             $ingreso->idPaciente = $request->paciente_id;
             $ingreso->idMedico = $request->doctor_id;
-            $ingreso->descripcion = $request->descripcion;
+            $ingreso->fecha = $request->fecha;
+            $ingreso->tratamiento = $request->tratamiento;
+            $ingreso->cantidad = $request->cantidad;
             $ingreso->monto = $request->monto;
             $ingreso->save();
 

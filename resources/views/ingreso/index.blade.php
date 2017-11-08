@@ -19,8 +19,8 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="form-group">
-                                <label for="paciente_id" class="col-md-1 col-xs-1 col-md-offset-1 control-label">Paciente</label>
-                                <div class="col-md-4 col-xs-5">
+                                <label for="paciente_id" class="col-md-1 col-xs-1 control-label">Paciente</label>
+                                <div class="col-md-3 col-xs-3">
                                     <select name="paciente_id" id="paciente_id" class="form-control">
                                         @foreach( $pacientes as $stdo )
                                             <option value="{{ $stdo->id }}" )selected>{{ $stdo->id }}
@@ -37,7 +37,7 @@
                                 </div>
 
                                 <label for="doctor_id" class="col-md-1 col-xs-1 control-label">Doctor</label>
-                                <div class="col-md-4 col-xs-5">
+                                <div class="col-md-3 col-xs-3">
                                     <select name="doctor_id" id="doctor_id" class="form-control">
                                         @foreach( $medicos as $stdo )
                                             <option value="{{ $stdo->id }}"
@@ -53,23 +53,47 @@
 
                                 </div>
 
-                            </div>
+                                <label for="fecha" class="col-md-1 col-xs-1 control-label">Fecha</label>
+                                <div class="col-md-2 col-xs-2">
+                                    <input type="date" id="fecha" name="fecha" class="form-control" required>
 
-                            <div class="form-group">
-
-                                <label for="descripcion" class="col-md-1 col-xs-1 col-md-offset-1 control-label">Descripción</label>
-                                <div class="col-md-6 col-xs-8">
-                                    <input id="descripcion" type="text" class="form-control" name="descripcion"
-                                           value="{{ old('descripcion')}}" placeholder="Descripcion">
-
-                                    @if ($errors->has('descripcion'))
+                                    @if ($errors->has('fecha'))
                                         <span class="help-block">
-                                      <strong>{{ $errors->first('descripcion')}}</strong>
+                                      <strong>{{ $errors->first('fecha')}}</strong>
                                   </span>
                                     @endif
 
                                 </div>
 
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="tratamiento" class="col-md-1 col-xs-1 control-label">Tratamiento</label>
+                                <div class="col-md-4 col-xs-8">
+                                    <input id="tratamiento" type="text" class="form-control" name="tratamiento"
+                                           value="{{ old('tratamiento')}}" placeholder="Tratamiento" required>
+
+                                    @if ($errors->has('tratamiento'))
+                                        <span class="help-block">
+                                      <strong>{{ $errors->first('tratamiento')}}</strong>
+                                  </span>
+                                    @endif
+
+                                </div>
+
+                                <label for="cantidad" class="col-md-1 col-xs-1 control-label">Cantidad</label>
+                                <div class="col-md-2 col-xs-2">
+                                    <input id="cantidad" type="number" class="form-control" name="cantidad"
+                                           value="{{ old('cantidad')}}" placeholder="Cantidad" min="1" step="1" required>
+
+                                    @if ($errors->has('cantidad'))
+                                        <span class="help-block">
+                                      <strong>{{ $errors->first('cantidad')}}</strong>
+                                  </span>
+                                    @endif
+
+                                </div>
 
                                 <label for="monto" class="col-md-1 col-xs-1 control-label">Monto</label>
                                 <div class="col-md-2 col-xs-2">
@@ -153,12 +177,14 @@
                                         <thead>
                                         <tr>
                                             <th class="text-center">#</th>
-                                            <th class="text-center">Nombres Doctor</th>
-                                            <th class="text-center">HC</th>
-                                            <th class="text-center">Doctor</th>
-                                            <th class="text-center">CORE</th>
-                                            <th class="text-center">Total</th>
                                             <th class="text-center">Fecha</th>
+                                            <th class="text-center">HC</th>
+                                            <th class="text-center col-md-2">Doctor</th>
+                                            <th class="text-center">Cant</th>
+                                            <th class="text-center">Precio Unit</th>
+                                            <th class="text-center">Total</th>
+                                            <th class="text-center">M. Doc.</th>
+                                            <th class="text-center">CORE</th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -170,14 +196,17 @@
                                         @foreach( $ingresos as $row )
                                             <tr>
                                                 <td scope="row" class="text-center">{{ $i + 1 }}</td>
-                                                <td class="text-center">{{ $row->doctor }}</td>
-                                                <td class="text-center">{{ $row->hc }}</td>
-                                                <?php $montoMedico = $row->monto * ((float)$row->mg / 100); ?>
-                                                <td class="text-center">{{ 'S/ ' . $montoMedico }}</td>
-                                                <?php $montoCore = $row->monto - $montoMedico; ?>
-                                                <td class="text-center">{{ 'S/ ' . $montoCore }}</td>
-                                                <td class="text-center">{{ 'S/ ' . $row->monto }}</td>
                                                 <td class="text-center">{{ $row->fecha }}</td>
+                                                <td class="text-center">{{ $row->hc }}</td>
+                                                <td class="text-center">{{ $row->ap_doctor }}</td>
+                                                <td class="text-center">{{ $row->cantidad }}</td>
+                                                <td class="text-center">{{ 'S/ ' . $row->monto }}</td>
+                                                <?php $montoTotal = ((float)$row->cantidad  * (float)$row->monto); ?>
+                                                <td class="text-center">{{ 'S/ ' . $montoTotal }}</td>
+                                                <?php $montoMedico = ($row->cantidad * $row->monto) * ((float)$row->mg / 100); ?>
+                                                <td class="text-center">{{ 'S/ ' . $montoMedico }}</td>
+                                                <?php $montoCore = ($row->cantidad * $row->monto) - $montoMedico; ?>
+                                                <td class="text-center">{{ 'S/ ' . $montoCore }}</td>
                                                 <td class="text-center">
                                                     <button class="btn btn-xs btn-success"
                                                             onclick="mostrarDetalleIngreso('{{ json_encode($ingresos[$i]) }}')"
@@ -201,7 +230,7 @@
                                                     </td>
                                                 @endif
                                             </tr>
-                                            <?php $mdoc += $montoMedico; $mcore += $montoCore; $mtotal += $row->monto; ?>
+                                            <?php $mdoc += $montoMedico; $mcore += $montoCore; $mtotal += $montoTotal; ?>
                                             <?php $i++; ?>
                                         @endforeach
                                         </tbody>
@@ -210,12 +239,12 @@
                                             <td class="text-center"></td>
                                             <td class="text-center"></td>
                                             <td class="text-center"></td>
-                                            <td class="text-center"><b><?php echo 'S/ ' . $mdoc; ?></b></td>
-                                            <td class="text-center"><b><?php echo 'S/ ' . $mcore; ?></b></td>
-                                            <td class="text-center"><b><?php echo 'S/ ' . $mtotal; ?></b></td>
                                             <td class="text-center"></td>
                                             <td class="text-center"></td>
                                             <td class="text-center"></td>
+                                            <td class="text-center"><strong><?php echo 'S/' . $mtotal; ?></strong></td>
+                                            <td class="text-center"><strong><?php echo 'S/' . $mdoc; ?></strong></td>
+                                            <td class="text-center"><strong><?php echo 'S/' . $mcore; ?></strong></td>
                                         </tr>
                                         </tfoot>
                                     </table>
@@ -258,17 +287,27 @@
                             <label for="doctor" class="col-md-2 col-md-offset-1 control-label">Doctor:</label>
                             <div id="doctor-txt" class="col-md-9"></div>
                         </div>
+                        <hr>
                         <div class="row">
-                            <label for="montoDoctor" class="col-md-2 col-md-offset-1 control-label">Monto
-                                Doctor:</label>
-                            <div id="montoDoctor-txt" class="col-md-3" style="padding-top: 12px;"></div>
+                            <label for="cantidad" class="col-md-2 col-md-offset-1 control-label">Cantidad:</label>
+                            <div id="cantidad-txt" class="col-md-1"></div>
 
-                            <label for="montoTotal" class="col-md-2 control-label">Monto Total:</label>
-                            <div id="montoTotal-txt" class="col-md-3" style="padding-top: 12px;"></div>
+                            <label for="tratamiento" class="col-md-2 control-label">Tratamiento:</label>
+                            <div id="tratamiento-txt" class="col-md-5"></div>
                         </div>
                         <div class="row">
-                            <label for="descripcion" class="col-md-2 col-md-offset-1 control-label">Descripción:</label>
-                            <div id="descripcion-txt" class="col-md-9"></div>
+                          <label for="montoUnitario" class="col-md-2 col-md-offset-1 control-label">Unitario:</label>
+                            <div id="montoUnitario-txt" class="col-md-3" ></div>
+
+                            <label for="montoTotal" class="col-md-2 control-label">Total:</label>
+                            <div id="montoTotal-txt" class="col-md-3" ></div>
+                        </div>
+                        <div class="row">
+                          <label for="montoDoctor" class="col-md-2 col-md-offset-1 control-label">Doctor:</label>
+                            <div id="montoDoctor-txt" class="col-md-3" ></div>
+
+                            <label for="montoCORE" class="col-md-2 control-label">CORE:</label>
+                            <div id="montoCORE-txt" class="col-md-3" ></div>
                         </div>
                     </div>
                     <div class="modal-footer">
