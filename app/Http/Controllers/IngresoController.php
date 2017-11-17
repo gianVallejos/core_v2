@@ -117,7 +117,9 @@ class IngresoController extends Controller
         $ingreso = Ingreso::findOrFail($id);
         $ingreso->idPaciente = $request->paciente_id;
         $ingreso->idMedico = $request->doctor_id;
-        $ingreso->descripcion = $request->descripcion;
+        $ingreso->fecha = $request->fecha;
+        $ingreso->tratamiento = $request->tratamiento;
+        $ingreso->cantidad = $request->cantidad;
         $ingreso->monto = $request->monto;
         $ingreso->save();
 
@@ -132,7 +134,7 @@ class IngresoController extends Controller
      * @param  \App\Ingreso  $ingreso
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ingreso $id)
+    public function destroy($id)
     {
         try{
           $ingreso = Ingreso::findOrFail($id);

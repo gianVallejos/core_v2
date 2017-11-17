@@ -134,7 +134,7 @@
                             </div>
                         </div>
                         <div class="text-center" style="display:block; padding-top: 18px; padding-bottom: 18px;">
-                            <button onclick="imprimirAgenda()" class="btn-core">Imprimir</button>
+                            <button id="imprimir-agenda" class="btn-core">Imprimir</button>
                         </div>
                     </div>
                 </div>
@@ -250,7 +250,8 @@
 <script type="text/javascript">
     var agendas = <?php echo json_encode($agendas); ?>;
 </script>
-<script src="{{ asset('js/citas.js?v=1.0.3') }}"></script>
+<script src="{{ asset('js/printThis.js?v=1.0.0') }}"></script>
+<script src="{{ asset('js/citas.js?v=1.0.5') }}"></script>
 <script>
     function buscarPaciente() {
         var input, filter, table, tr, td, i;
@@ -270,6 +271,18 @@
             }
         }
     }
+
+    $(document).ready(function(){
+        $('#imprimir-agenda').click(function(){
+            var doctor = $('#selectDoctor option:selected').text();
+            var moment = $('#calendar').fullCalendar('getDate');
+            $('#calendar .fc-view-container').printThis({
+               importCSS: false,
+               loadCSS: "http://localhost/core_v2/css/print.css?v=1.0.3",
+               header: "<strong>Doctor: </strong><div class='title'>" + doctor + "</div><br><strong>Fecha: </strong><div class='fecha'>" + moment.format() + "</div><hr>"
+            });
+        });
+    });
 
     function imprimirAgenda() {
         window.print();

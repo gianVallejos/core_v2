@@ -115,13 +115,17 @@ $(document).ready(function() {
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay,listWeek'
+        right: 'month,listDay,listWeek'
       },
-      buttonText: { today: 'Hoy', month: 'Mes', week: 'Sem', day: 'Día', list: 'Lista' },
+      buttonText: { today: 'Hoy', month: 'Mes', week: 'Sem', day: 'Día' },
       monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
       monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
       dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'],
       dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab'],
+      views: {
+				listDay: { buttonText: 'Por Dia' }
+			},
+			defaultView: 'month',
       defaultDate: today,
       navLinks: true, // can click day/week names to navigate views
       editable: true,

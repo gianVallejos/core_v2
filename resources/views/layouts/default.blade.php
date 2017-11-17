@@ -26,7 +26,7 @@
     <link href="{{ asset('css/table.css?v=1.0.1') }}" rel="stylesheet">
     <link href="{{ asset('sweetalert/sweetalert.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" media="print" href="{{ asset('css/print.css?v=1.0.1') }}">
+    <link rel="stylesheet" type="text/css" media="print" href="{{ asset('css/print.css?v=1.0.3') }}">
 
     <!-- Full Calendar -->
     <link href="{{ asset('css/fullcalendar/fullcalendar.css') }}" rel="stylesheet">
