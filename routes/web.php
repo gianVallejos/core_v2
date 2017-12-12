@@ -1,4 +1,4 @@
-<?php
+  <?php
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +49,7 @@ Route::get('tratamiento', 'TratamientoController@index')->name('tratamientoindex
 
 // Agenda - Rutas
 Route::resource('agendas', 'AgendaController');
+Route::get('agenda', 'AgendaController@index')->name('agendaindex');
 
 // Pagos (Ingreso)
 Route::resource('ingresos', 'IngresoController');
@@ -72,3 +73,5 @@ Route::get('api-v1/agregar-detalle-proveedor/', 'WsCoreController@agregarDetalle
 Route::get('api-v1/eliminar-detalle-proveedor/{idDProveedor}', 'WsCoreController@eliminarDetalleProveedor')->name('eliminarDetalleProveedor');
 
 Route::get('api-v1/buscar-ingresos/', 'WsCoreController@buscarIngresos')->name('agregarIngresos');
+
+Route::get('api-v1/editar-cita/', 'WsCoreController@editarCita')->name('editarCitas');

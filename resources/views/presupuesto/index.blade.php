@@ -46,7 +46,7 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading text-center title">PRESUPUESTOS</div>
-                    <div class="panel-body" style="padding-bottom: 45px; padding-top: 65px;">
+                    <div class="panel-body" style="padding-bottom: 45px; padding-top: 35px;">
                         <div class="row">
                             <div class="form-group">
                                 <label for="buscar"
@@ -58,8 +58,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-10 col-xs-12 col-md-offset-1"
-                                     style="margin-top: 45px; margin-bottom: 45px;">
+                                <div class="col-md-12 col-xs-12">
                                     <div id="table-wrapper">
                                         <div id="table-scroll">
                                             <table id="tablaPresp" class="table table-responsive table-hover">

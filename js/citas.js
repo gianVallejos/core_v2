@@ -6,6 +6,8 @@ $(document).ready(function() {
   $('#cita-form').submit(function(event){
       event.preventDefault();
 
+      var hc = $.trim($('#hc').val());
+      if( hc == '' ){ hc = -1; }
       var paciente = $.trim($('#paciente').val());
       var celular = $.trim($('#celular').val());
       var doctor = $.trim($('#doctor').val());
@@ -19,6 +21,7 @@ $(document).ready(function() {
               type: 'GET',
               url: '/core_v2/api-v1/agregar-cita',
               data: {
+                    'hc': hc,
                     'paciente': paciente,
                     'celular': celular,
                     'dia': dia,
@@ -31,10 +34,15 @@ $(document).ready(function() {
                   var estado = JSON.parse(data);
 
                   if( estado[0]["ESTADO"] > 0 ){
-                      alertMessage('Éxito', 'Cita agregada correctamente', 'success');
-                      setTimeout( function(){
-                          location.reload();
-                      }, 2000);
+                      swal({
+                          title: "Éxito",
+                          text: "Cita agregada correctamente.",
+                          type: "success",
+                          closeOnConfirm: false
+                      },
+                        function(){
+                            location.reload();
+                      });
                       // loadCalendar();
                       //RESET FIELDS & UPDATE CALENDAR
                       //Loadcalendar should get data from WsController to update live
@@ -136,24 +144,55 @@ $(document).ready(function() {
 
   $('#nuevoPacienteForm').submit(function(event){
       event.preventDefault();
-      $nombrePaciente = $.trim($('#nombrePaciente').val());
-      $celularPaciente = $.trim($('#celularPaciente').val());
 
-      datosAgregarPacienteForm($nombrePaciente, $celularPaciente);
+      let hc = -1;
+      let nombrePaciente = $.trim($('#nombrePaciente').val());
+      let celularPaciente = $.trim($('#celularPaciente').val());
 
+      if( validarNuevoPaciente(nombrePaciente, celularPaciente) ){
+        datosAgregarPacienteForm(hc, nombrePaciente, celularPaciente);
+      }
+
+  });
+
+  function validarNuevoPaciente(nombre, celular){
+      if( nombre == "" ){
+          alertMessage('Error', 'Debe seleccionar un nombre de paciente', 'error');
+          $('#nombrePaciente').focus();
+          return false;
+      }
+      return true;
+  }
+
+  $('#gestion-citas-down').on('click', function(){
+      $('#gestion-citas-up').css('display', 'inline-block');
+      $(this).css('display', 'none');
+  });
+
+  $('#gestion-citas-up').on('click', function(){
+      $('#gestion-citas').collapse('hide');
+      $('#gestion-citas-down').css('display', 'inline-block');
+      $(this).css('display', 'none');
   });
 
 });
 
-function agregarACitaPaciente(paciente, celular){
+function agregarACitaPaciente(hc, paciente, celular){
     if( celular == '' ){
         celular = '';
     }
-    datosAgregarPacienteForm(paciente, celular);
+    datosAgregarPacienteForm(hc, paciente, celular);
 
 }
 
-function datosAgregarPacienteForm(paciente, celular){
+function datosAgregarPacienteForm(hc, paciente, celular){
+    if( hc != '-1' ){
+      $('#hc').val(hc);
+    }else{
+      $('#group-hc-class').hide();
+      $('#group-celular-class').attr('class', 'col-md-12');
+      hcActual = -1;
+    }
     $('#paciente').val(paciente);
     $('#celular').val(celular);
 
@@ -162,9 +201,76 @@ function datosAgregarPacienteForm(paciente, celular){
     $('.nuevoPaciente').hide();
     $('.buscarPaciente').hide();
 
-    $('#paciente-length').attr('class', 'col-md-6');
+    // $('#paciente-length').attr('class', 'col-md-6');
 
     $('.modal').modal('hide');
     // $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
+}
+
+function editarCita(php_data) {
+    data = JSON.parse(php_data);
+
+    var idAgenda = data["id"];
+    document.edit.idAgenda.value = idAgenda;
+
+    //$('#idAgenda-txto').text(data["id"]);
+    $('#title-txto').text(data["title"]);
+    $('#paciente-2').val(data["title"]);
+
+    $('#hc-2').val(data["hc"]);
+
+    if(data["hc"] != '-1'){
+        $('#paciente-2').prop('readonly', true);
+    }
+
+    var celular = data["celular"];
+    document.edit.celular.value = celular;
+
+    var desde = data["desde"];
+    var dia = desde.substring(0, 10);
+    var desde = desde.substring(11, 19);
+    document.edit.dia.value = dia;
+    document.edit.desde.value = desde;
+
+    var hasta = data["hasta"];
+    var hasta = hasta.substring(11, 19);
+    document.edit.hasta.value = hasta;
+
+    var idDoctor = data["idDoctor"];
+    document.edit.idDoctor.value = idDoctor;
+
+    var tratamiento = data["tratamiento"];
+    document.edit.tratamiento.value = tratamiento;
+}
+
+function editarAgenda() {
+    let citas = $('#editar-cita').serialize();
+    $.ajax({
+        type: 'GET',
+        url: '/core_v2/api-v1/editar-cita',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: citas,
+        success: function (data) {
+            let estado = JSON.parse(data[0]["ESTADO"]);
+            if( estado == '1' ){
+                swal({
+                    title: "Correcto",
+                    text: "Se ha modificado la cita correctamente.",
+                    type: "success",
+                    closeOnConfirm: false
+                },
+                  function(){
+                      location.reload();
+                });
+            }else{
+                swal('Error', 'Ha ocurrido un error al modificar.', 'warning');
+            }
+        },
+        error: function () {
+            swal('Atención', 'Ha ocurrido un problema. Contactar con el webmaster', 'warning');
+        }
+    });
+
 }

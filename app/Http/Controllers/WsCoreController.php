@@ -52,6 +52,7 @@ class WsCoreController extends Controller
     }
 
     public function agregarCita(Request $request){
+        $hc = $request->input('hc');
         $paciente = $request->input('paciente');
         $celular = $request->input('celular');
         $doctor = $request->input('doctor');
@@ -68,7 +69,7 @@ class WsCoreController extends Controller
         $from = $fecha . 'T' . $desde;
         $to = $fecha . 'T' . $hasta;
 
-        $ac = DB::select('call agregarCita("'. $paciente .'", "'. $from . '", "'. $to .'", "' . $celular . '", '. $doctor .', "'. $tratamiento .'")');
+        $ac = DB::select('call agregarCita("'. $hc .'", "'. $paciente .'", "'. $from . '", "'. $to .'", "' . $celular . '", '. $doctor .', "'. $tratamiento .'")');
 
         // alert()->error('Ha ocurrido un error al clonar. Avisar al webmaster', 'ERROR' );
 
@@ -114,5 +115,26 @@ class WsCoreController extends Controller
         }
 
         print(json_encode($res));
+    }
+
+    public function editarCita(Request $request){
+        $idAgenda = $request->input('idAgenda');
+        $hc = $request->input('hc');
+        $paciente = $request->input('paciente');
+        $celular = $request->input('celular');
+        $fecha = $request->input('dia');
+        $desde = $request->input('desde');
+        $hasta = $request->input('hasta');
+        $idDoctor = $request->input('idDoctor');
+        $tratamiento = $request->input('tratamiento');
+
+        $from = $fecha . 'T' . $desde;
+        $to = $fecha . 'T' . $hasta;
+
+        $sql = 'call editarCitaById('. $idAgenda .', '. $hc .', "'. $paciente .'", "'. $celular . '", "'. $from .'", "' . $to . '", '. $idDoctor .', "'. $tratamiento .'")';
+
+        $ac = DB::select($sql);
+
+        print(json_encode($ac));
     }
 }

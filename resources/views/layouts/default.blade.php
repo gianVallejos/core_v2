@@ -21,7 +21,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css?v=1.0.0') }}" rel="stylesheet">
-    <link href="{{ asset('css/core.css?v=2.0.15') }}" rel="stylesheet">
+    <link href="{{ asset('css/core.css?v=2.0.23') }}" rel="stylesheet">
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('css/table.css?v=1.0.1') }}" rel="stylesheet">
     <link href="{{ asset('sweetalert/sweetalert.css') }}" rel="stylesheet">

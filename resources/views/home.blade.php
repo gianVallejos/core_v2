@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1" style="margin-top: 25px;">
+            <div class="col-md-12" style="margin-top: 25px;">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center title">NAVEGACIÓN</div>
 

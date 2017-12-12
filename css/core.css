@@ -144,10 +144,15 @@ footer{
     color: #FFF;
 }
 
+.h1, .h2, .h3, h1, h2, h3{
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-align: center;
+}
+
 .panel-body{
-    padding-top: 45px;
-    padding-bottom: 35px;
-    padding-left: 39px;
+    padding: 45px 39px 35px 39px;
 }
 
 /*---------------------- PRESUPUESTOS ----------------*/
@@ -234,6 +239,61 @@ a.btn-core:hover{
 .header-presup-print{
     display: none;
     padding-left: 95px; padding-right: 45px;
+}
+
+.form-horizontal .control-label{
+    text-align: left;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.form-control{
+    border-radius: 0px;
+    box-shadow: none;
+    border: 1px solid #ececec;
+    padding: 6px 9px;
+}
+
+.form-control:focus{
+    box-shadow: none;
+    border: 1px solid #3097D1;
+}
+
+.form-control::placeholder{
+    color: #9a9a9a;
+}
+
+/* FullCalendar Font size */
+.fc-row .fc-content-skeleton tbody td, .fc-row .fc-helper-skeleton tbody td,
+.fc-list-table td{
+    font-size: 13px;
+}
+
+#myModalEdit .modal-body{
+    padding-left: 44px;
+}
+
+.btn-toggle{
+    background-color: #19396c;
+    border: none;
+}
+
+.btn-toggle:focus{
+    outline: 0;
+}
+
+.container-big-arrow{
+    position: relative;
+}
+
+.container-arrow{
+    position: absolute;
+    right: 9px;
+    top: 0px;
+}
+
+table.table{
+    font-size: 14px;
 }
 
 @media print

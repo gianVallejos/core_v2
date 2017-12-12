@@ -23,7 +23,13 @@ class AgendaController extends Controller
         $idUser = Auth::user()->id;
         $agendas = json_encode(DB::select('call obtenerCitas(' . $idUser .')'));
 
-        return view($this->path . '.index', compact('doctores', 'agendas', 'data'));
+        $citas = DB::table('agendas')
+                      ->join('medicos', 'medicos.id', '=', 'agendas.idDoctor')
+                      ->select('agendas.*', 'medicos.nombres', 'medicos.apellidos')
+                      ->orderby('agendas.id', 'desc')
+                      ->get();
+
+        return view($this->path . '.index', compact('doctores', 'agendas', 'data', 'citas'));
     }
 
     /**
@@ -87,8 +93,18 @@ class AgendaController extends Controller
      * @param  \App\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Agenda $agenda)
+    public function destroy($id)
     {
-        //
+        try{
+            $citas = Agenda::findOrFail($id);
+            $citas->delete();
+
+            alert()->error('Cita eliminada correctamente', 'Eliminado');
+
+            return redirect()->route('agendaindex');
+
+        }catch(Exception $e){
+            return "Fatal error - " . $e->getMessage();
+        }
     }
 }

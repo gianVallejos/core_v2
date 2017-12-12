@@ -35,12 +35,12 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-      // if( Auth::check() ){
-      //     return redirect()->route('home');
-      // }
+      if( Auth::check() ){
+          return redirect()->route('home');
+      }
         $this->middleware('guest')->except('logout');
     }
-    // 
+    //
     // protected function guard()
     // {
     //     return Auth::guard('guard-name');
