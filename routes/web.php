@@ -75,3 +75,5 @@ Route::get('api-v1/eliminar-detalle-proveedor/{idDProveedor}', 'WsCoreController
 Route::get('api-v1/buscar-ingresos/', 'WsCoreController@buscarIngresos')->name('agregarIngresos');
 
 Route::get('api-v1/editar-cita/', 'WsCoreController@editarCita')->name('editarCitas');
+
+Route::get('api-v1/obtener-todas-cita/', 'WsCoreController@obtenerTodasCitas')->name('obtenerTodasCitas');

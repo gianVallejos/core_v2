@@ -2,6 +2,67 @@
 
 @section('content')
 
+<?php
+
+  function writeMes($mes){
+      if( $mes == '01' ){
+          return 'ENE';
+      }else if( $mes == '02' ){
+          return 'FEB';
+      }else if( $mes == '03' ){
+          return 'MAR';
+      }else if( $mes == '04' ){
+          return 'ABR';
+      }else if( $mes == '05' ){
+          return 'MAY';
+      }else if( $mes == '06' ){
+          return 'JUN';
+      }else if( $mes == '07' ){
+          return 'JUL';
+      }else if( $mes == '08' ){
+          return 'AGO';
+      }else if( $mes == '09' ){
+          return 'SEPT';
+      }else if( $mes == '10' ){
+          return 'OCT';
+      }else if( $mes == '11' ){
+          return 'NOV';
+      }else if( $mes == '12' ){
+          return 'DIC';
+      }
+      else{
+          return '';
+      }
+  }
+
+  function translateFecha($arr){
+      $pos = strpos($arr, '-');
+      $pos_dos = strripos($arr, '-');
+
+      $dia = substr($arr, $pos_dos + 1, strlen($arr) - 1);
+      $mes = substr($arr, $pos + 1, ($pos_dos - $pos - 1));
+      $year = substr($arr, 0, 4);
+
+
+      return $dia . '-' . writeMes($mes) . '-' . $year;
+  }
+
+  function getFecha($arr){
+      $pos = strpos($arr, 'T');
+      $fecha = substr($arr, 0, $pos);
+
+      return translateFecha($fecha);
+  }
+
+  function getHora($arr){
+    $pos = strpos($arr, 'T');
+    $hora = substr($arr, $pos + 1, (strlen($arr) - $pos) - 4);
+
+    return $hora;
+  }
+
+ ?>
+
     <div class="container-fluid">
       <div class="row">
 
@@ -34,6 +95,7 @@
                                       <th class="text-center">Doctor</th>
                                       <th class="text-center">Tratamiento</th>
                                       <th class="text-center">Celular</th>
+                                      <th class="text-center">Fecha</th>
                                       <th class="text-center">Desde</th>
                                       <th class="text-center">Hasta</th>
                                       <th></th>
@@ -50,8 +112,9 @@
                                           <td class="text-center">{{ $row->nombres }} {{ $row->apellidos }}</td>
                                           <td class="text-center">{{ $row->tratamiento }}</td>
                                           <td class="text-center">{{ $row->celular }}</td>
-                                          <td class="text-center">{{ $row->desde }}</td>
-                                          <td class="text-center">{{ $row->hasta }}</td>
+                                          <td class="text-center">{{ getFecha($row->desde) }}</td>
+                                          <td class="text-center">{{ getHora($row->desde) }}</td>
+                                          <td class="text-center">{{ getHora($row->hasta) }}</td>
                                           <td class="text-center">
                                               <button class="btn btn-xs btn-warning"
                                                       onclick="editarCita('{{ json_encode($row) }}')"
@@ -89,7 +152,7 @@
                     <div class="row">
                       <div id="calendar-agenda" class="col-lg-7 col-md-8 col-xs-12">
                         <div class="form-group">
-                            <label for="doctor" class="col-md-2 control-label"
+                            <label for="doctor" class="col-md-1 control-label"
                                    style="padding-top: 5px;">Doctor</label>
                             <div class="col-md-8">
                                 <select class="form-control" name="doctor" id="selectDoctor">
@@ -101,8 +164,9 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                               <button id="imprimir-agenda" class="btn-core">Imprimir</button>
+                              <button id="sincronizarAgenda" class="btn-core">Sincronizar</button>
                             </div>
                         </div>
 
@@ -172,8 +236,15 @@
 
                                   <label for="dia" class="col-md-12 control-label">Día</label>
                                   <div class="col-md-12">
-                                      <input class="form-control" type="date" name="dia" id="dia" value="<?php echo date('Y-m-d'); ?>">
+                                      <input class="form-control" type="text" name="dia" id="dia" value="<?php echo date('Y-m-d'); ?>">
                                   </div>
+
+                                  <?php
+                                      $horas = array('07:00:00', '07:30:00', '08:00:00', '08:30:00', '09:00:00', '09:30:00', '10:00:00', '10:30:00', '11:00:00', '11:30:00',
+                                          '12:00:00', '12:30:00', '13:00:00', '13:30:00', '14:00:00', '14:30:00', '15:00:00', '15:30:00', '16:00:00', '16:30:00',
+                                          '17:00:00', '17:30:00', '18:00:00', '18:30:00', '19:00:00', '19:30:00', '20:00:00', '20:30:00', '21:00:00', '21:30:00',
+                                          '22:00:00', '22:30:00');
+                                   ?>
 
                                   <label for="desde" class="col-md-12 control-label">Desde</label>
                                   <div class="col-md-12">
@@ -181,10 +252,6 @@
                                           <option value="-1">Hora</option>
                                           <?php
                                           $hora = 8;
-                                          $horas = array('07:00:00', '07:30:00', '08:00:00', '08:30:00', '09:00:00', '09:30:00', '10:00:00', '10:30:00', '11:00:00', '11:30:00',
-                                              '12:00:00', '12:30:00', '13:00:00', '13:30:00', '14:00:00', '14:30:00', '15:00:00', '15:30:00', '16:00:00', '16:30:00',
-                                              '17:00:00', '17:30:00', '18:00:00', '18:30:00', '19:00:00', '19:30:00', '20:00:00', '20:30:00', '21:00:00', '21:30:00',
-                                              '22:00:00', '22:30:00');
                                           for ($i = 0; $i < sizeof($horas); $i++) {
                                               echo '<option value="' . $horas[$i] . '">' . $horas[$i] . '</option>';
                                           }
@@ -198,10 +265,6 @@
                                           <option value="-1">Hora</option>
                                           <?php
                                           $hora = 8;
-                                          $horas = array('07:00:00', '07:30:00', '08:00:00', '08:30:00', '09:00:00', '09:30:00', '10:00:00', '10:30:00', '11:00:00', '11:30:00',
-                                              '12:00:00', '12:30:00', '13:00:00', '13:30:00', '14:00:00', '14:30:00', '15:00:00', '15:30:00', '16:00:00', '16:30:00',
-                                              '17:00:00', '17:30:00', '18:00:00', '18:30:00', '19:00:00', '19:30:00', '20:00:00', '20:30:00', '21:00:00', '21:30:00',
-                                              '22:00:00', '22:30:00');
                                           for ($i = 0; $i < sizeof($horas); $i++) {
                                               echo '<option value="' . $horas[$i] . '">' . $horas[$i] . '</option>';
                                           }
@@ -221,6 +284,7 @@
                           </form>
                       </div>
                     </div>
+
                 </div>
               </div>
           </div>
@@ -228,6 +292,7 @@
 
     </div>
 
+<!-- Modal Nuevo Paciente -->
     <div id="nuevoPaciente" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -269,6 +334,7 @@
         </div>
     </div>
 
+<!-- Modal Buscar Paciente -->
     <div id="buscarPaciente" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -374,7 +440,7 @@
                             </div>
                             <label class="col-md-1 col-xs-2 control-label">Día</label>
                             <div class="col-md-4 col-xs-9">
-                                <input type="date" class="form-control" name="dia" required autofocus>
+                                <input id="dia-modal" type="text" class="form-control" name="dia" required autofocus>
 
                                 @if ($errors->has('desde'))
                                     <span class="help-block">
@@ -479,12 +545,13 @@
     </div>
 
 @endsection
+
 <script src="{{ asset('js/app.js') }}"></script>
 <script type="text/javascript">
     var agendas = <?php echo json_encode($agendas); ?>;
 </script>
 <script src="{{ asset('js/printThis.js?v=1.0.0') }}"></script>
-<script src="{{ asset('js/citas.js?v=1.0.10') }}"></script>
+
 <script>
     function buscarPaciente() {
         var input, filter, table, tr, td, i;

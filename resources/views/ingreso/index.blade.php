@@ -7,10 +7,6 @@
 
             <div class="col-md-12">
 
-                <!-- <div class="alert alert-success text-center">
-                    Nuevo paciente agregado correctamente.
-                </div> -->
-
                 <div class="panel panel-default">
                     <div class="panel-heading text-center title">AGREGAR INGRESO</div>
                     <div class="panel-body">
@@ -250,6 +246,13 @@
                                     </table>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button class="btn-core" type="button" name="button">Imprimir</button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

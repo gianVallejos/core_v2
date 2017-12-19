@@ -19,14 +19,18 @@
 
     <link rel="icon" href="/core_v2/images/favicon.ico">
 
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"> -->
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css?v=1.0.0') }}" rel="stylesheet">
-    <link href="{{ asset('css/core.css?v=2.0.23') }}" rel="stylesheet">
+    <link href="{{ asset('css/core.css?v=2.0.27') }}" rel="stylesheet">
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('css/table.css?v=1.0.1') }}" rel="stylesheet">
     <link href="{{ asset('sweetalert/sweetalert.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" media="print" href="{{ asset('css/print.css?v=1.0.3') }}">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- Full Calendar -->
     <link href="{{ asset('css/fullcalendar/fullcalendar.css') }}" rel="stylesheet">
@@ -38,6 +42,11 @@
 </head>
 <body>
 <div id="app">
+
+  <div id="loader" class="loader">
+    <div class="loader-img"></div>
+  </div>
+
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -124,42 +133,24 @@
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">Ingresar</a></li>
                     @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                    <li>
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                            <img src="{{ asset('images/icons/logout.svg')}}" width="25" style="margin-right: 7px;" />Cerrar Sesión
+                        </a>
 
-                            <ul class="dropdown-menu" role="menu">
-                                <!--
-                                                                    <li>
-                                                                        <a href="/core_v2/register">Registrar Usuario</a>
-                                                                    </li>
-                                -->
-                                <!--
-                                                                    <li>
-                                                                        <a href="#">Perfil</a>
-                                                                    </li>
-                                -->
-                                <li>
-                                    <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Cerrar Sesión
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                          style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                              style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
                     @endif
                 </ul>
             </div>
         </div>
     </nav>
+
 
     @yield('content')
 </div>
@@ -186,7 +177,33 @@
 <script src="{{ asset('js/pacientes.js?v=1.0.2') }}"></script>
 <script src="{{ asset('js/medicos.js?v=1.0.2') }}"></script>
 <script src="{{ asset('js/ingresos.js?v=1.0.5') }}"></script>
+<script src="{{ asset('js/citas.js?v=1.0.24') }}"></script>
 <script src="{{ asset('sweetalert/sweetalert.min.js') }}"></script>
+
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $( function() {
+      var date = new Date();
+      var currentMonth = date.getMonth();
+      var currentDate = date.getDate();
+      var currentYear = date.getFullYear();
+
+      $("#dia").datepicker({
+        changeYear: true,
+        dateFormat: 'yy-mm-dd',
+        minDate: new Date(currentYear, currentMonth, currentDate)
+      });
+
+      $("#dia-modal").datepicker({
+        changeYear: true,
+        dateFormat: 'yy-mm-dd',
+        minDate: new Date(currentYear, currentMonth, currentDate)
+      });
+
+  } );
+</script>
+
 
 <!-- Full calendar -->
 <script src="{{ asset('js/fullcalendar/lib/moment.min.js') }}"></script>

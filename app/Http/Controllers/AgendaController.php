@@ -26,7 +26,7 @@ class AgendaController extends Controller
         $citas = DB::table('agendas')
                       ->join('medicos', 'medicos.id', '=', 'agendas.idDoctor')
                       ->select('agendas.*', 'medicos.nombres', 'medicos.apellidos')
-                      ->orderby('agendas.id', 'desc')
+                      ->orderby('agendas.desde', 'desc')
                       ->get();
 
         return view($this->path . '.index', compact('doctores', 'agendas', 'data', 'citas'));

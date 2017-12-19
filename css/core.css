@@ -250,7 +250,7 @@ a.btn-core:hover{
 .form-control{
     border-radius: 0px;
     box-shadow: none;
-    border: 1px solid #ececec;
+    border: 1px solid #8a8a8a;
     padding: 6px 9px;
 }
 
@@ -306,4 +306,40 @@ table.table{
     .header-presup-print{
         display: inherit;
     }
+
+    #title-odonto{
+        display: none;
+    }
+}
+
+#loader{
+    position: fixed;
+    background-color: rgba(0, 0, 0, .7);
+    width: 100%;
+    height: 100%;
+    z-index: 998;
+    line-height: 1000px;
+}
+
+.loader{
+    display: none;
+}
+
+.loader-img {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 16px solid #ececec; /* Light grey */
+    border-top: 16px solid #19396c; /* Blue */
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    animation: spin 2s linear infinite;
+    z-index: 999;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

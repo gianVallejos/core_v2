@@ -7,10 +7,6 @@
 
             <div class="col-md-12">
 
-                <!-- <div class="alert alert-success text-center">
-                    Nuevo paciente agregado correctamente.
-                </div> -->
-
                 <div class="panel panel-default">
                     <div class="panel-heading text-center title">AGREGAR PACIENTE</div>
                     <div class="panel-body">

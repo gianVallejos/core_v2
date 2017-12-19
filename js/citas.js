@@ -75,6 +75,41 @@ $(document).ready(function() {
       });
   });
 
+  $('#sincronizarAgenda').click(function(){
+    $('#loader').show();
+    $.ajax({
+      type:'GET',
+      url: '/core_v2/api-v1/obtener-todas-cita',
+      success: function(citas){
+              enviarCitasACloud(citas);
+          },
+          error: function(){
+              alertMessage('Error', 'Ha ocurrido un error, contáctese con el webmaster.', 'error');
+          }
+    });
+  });
+
+  function enviarCitasACloud(citas){
+      var data = citas;
+
+      $.ajax({
+        type: 'GET',
+        url: 'http://cajamarcaopina.com/core_cloud/api-v1/agregar-citas',
+        data: {arr: data},
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function(data){
+            alertMessage('Éxito', 'Citas sincronizadas correctamente a la web', 'success');
+        },
+        error: function(){
+            alertMessage('Error', 'Ha ocurrido un error, segurese de estar conectado a Internet', 'error');
+        },
+        complete: function(){
+            $('#loader').hide();
+        }
+      });
+  }
+
   function validarDatos(paciente, doctor, tratamiento, dia, desde, hasta){
 
       if( paciente == "" ){
@@ -121,7 +156,7 @@ $(document).ready(function() {
 
     $('#calendar').fullCalendar({
       header: {
-        left: 'prev,next today',
+        left: 'prev,next,today',
         center: 'title',
         right: 'month,listDay,listWeek'
       },
@@ -134,7 +169,6 @@ $(document).ready(function() {
 				listDay: { buttonText: 'Por Dia' }
 			},
 			defaultView: 'month',
-      defaultDate: today,
       navLinks: true, // can click day/week names to navigate views
       editable: true,
       eventLimit: true, // allow "more" link when too many events
@@ -196,7 +230,7 @@ function datosAgregarPacienteForm(hc, paciente, celular){
     $('#paciente').val(paciente);
     $('#celular').val(celular);
 
-    alertMessage('Éxito', 'Paciente agregado correctamente.', 'success');
+    // alertMessage('Éxito', 'Paciente agregado correctamente.', 'success');
 
     $('.nuevoPaciente').hide();
     $('.buscarPaciente').hide();

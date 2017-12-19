@@ -41,11 +41,13 @@
                   <h2><b>PRESUPUESTO N° {{ $nroPresupuesto }}</b></h2>
           </div>
           <div class="header-presup-print">
-              <div class="col-md-8 col-xs-8" >
-                <h2><b>PRESUPUESTO N° {{ $nroPresupuesto }}</b></h2>
-              </div>
-              <div class="col-md-4 col-xs-4 text-right">
-                <img src="{{ asset('images/logotipo_brand.png')}}" width="250">
+              <div class="row">
+                <div class="col-md-12 text-right">
+                  <img src="{{ asset('images/logotipo_brand.png')}}" width="285">
+                </div>
+                <div class="col-md-12 text-center" >
+                  <h2><b>PRESUPUESTO N° {{ $nroPresupuesto }}</b></h2>
+                </div>
               </div>
           </div>
       </div>
@@ -119,7 +121,7 @@
               </div>
   <!-- ODONTOGRAMA -->
               <div class="panel panel-default" style="margin-top: 15px;">
-                  <div class="panel-heading text-center title">ODONTOGRAMA</div>
+                  <div id="title-odonto" class="panel-heading text-center title">ODONTOGRAMA</div>
                   <div class="panel-body" style="padding-bottom: 45px; padding-top: 38px;">
                         <div class="row">
                           <!-- BLOQUE 01 -->

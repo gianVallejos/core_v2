@@ -137,4 +137,9 @@ class WsCoreController extends Controller
 
         print(json_encode($ac));
     }
+
+    public function obtenerTodasCitas(Request $request){
+      $agendas = DB::select('call obtenerTodasCitas()');
+      print(json_encode($agendas));
+    }
 }
