@@ -1,0 +1,14 @@
+@media print{
+  .print-ignore{
+      display: none;
+  }
+
+  body{
+      font-size: 14px;
+      /* font-family: 'Lato', sans-serif; */
+  }
+
+  #tablaIngresos{
+      font-size: 10px;
+  }
+}

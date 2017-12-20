@@ -166,7 +166,7 @@
                             </div>
                             <div class="col-md-3">
                               <button id="imprimir-agenda" class="btn-core">Imprimir</button>
-                              <button id="sincronizarAgenda" class="btn-core">Sincronizar</button>
+                              <!-- <button id="sincronizarAgenda" class="btn-core">Sincronizar</button> -->
                             </div>
                         </div>
 
@@ -236,7 +236,7 @@
 
                                   <label for="dia" class="col-md-12 control-label">Día</label>
                                   <div class="col-md-12">
-                                      <input class="form-control" type="text" name="dia" id="dia" value="<?php echo date('Y-m-d'); ?>">
+                                      <input class="form-control" type="date" name="dia" id="dia" value="<?php echo date('Y-m-d'); ?>">
                                   </div>
 
                                   <?php
@@ -547,6 +547,7 @@
 @endsection
 
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/citas.js?v=1.0.24') }}"></script>
 <script type="text/javascript">
     var agendas = <?php echo json_encode($agendas); ?>;
 </script>

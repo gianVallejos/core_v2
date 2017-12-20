@@ -17,12 +17,8 @@
                         <div class="form-group">
                             <label for="paciente_id" class="col-md-1 col-xs-1 control-label">Paciente</label>
                             <div class="col-md-3 col-xs-3">
-                                <select name="paciente_id" id="paciente_id" class="form-control">
-                                    @foreach( $pacientes as $stdo )
-                                        <option value="{{ $stdo->id }}" {{ $ingresos->idPaciente == $stdo->id ? 'selected="selected"' : '' }}>{{ $stdo->id }}
-                                            - {{ $stdo->apellidos }} {{ $stdo->nombres }}</option>
-                                    @endforeach
-                                </select>
+                              <input type="hidden" name="paciente_id" id="paciente_id" value="{{ $paciente[0]->id }}">
+                              <input name="paciente_nombre" id="paciente_nombre" class="form-control" value="{{ $paciente[0]->nombres }} {{ $paciente[0]->apellidos }}" disabled>
 
                                 @if ($errors->has('paciente_id'))
                                     <span class="help-block">
@@ -67,7 +63,7 @@
                             <label for="tratamiento" class="col-md-1 col-xs-1 control-label">Tratamiento</label>
                             <div class="col-md-4 col-xs-8">
                                 <input id="tratamiento" type="text" class="form-control" name="tratamiento"
-                                       value="{{ $ingresos->tratamiento }}" placeholder="Tratamiento" required>
+                                       value="{{ $ingresos->tratamiento }}" placeholder="Tratamiento" readonly>
 
                                 @if ($errors->has('tratamiento'))
                                     <span class="help-block">
@@ -93,7 +89,7 @@
                             <label for="monto" class="col-md-1 col-xs-1 control-label">Monto</label>
                             <div class="col-md-2 col-xs-2">
                                 <input id="monto" type="number" class="form-control" name="monto"
-                                       value="{{ $ingresos->monto }}" placeholder="Monto" min="0" step=".1" required>
+                                       value="{{ $ingresos->monto }}" placeholder="Monto" min="0" step=".1" readonly>
 
                                 @if ($errors->has('monto'))
                                     <span class="help-block">

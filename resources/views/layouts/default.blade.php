@@ -23,7 +23,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css?v=1.0.0') }}" rel="stylesheet">
-    <link href="{{ asset('css/core.css?v=2.0.27') }}" rel="stylesheet">
+    <link href="{{ asset('css/core.css?v=2.0.28') }}" rel="stylesheet">
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('css/table.css?v=1.0.1') }}" rel="stylesheet">
     <link href="{{ asset('sweetalert/sweetalert.css') }}" rel="stylesheet">
@@ -162,7 +162,7 @@
                 Developed by <a href="http://www.gvallejos.com" class="link" target="_blank" style="color: #87B0FF;">gVallejos.com</a>
             </div>
             <div class="col-md-6 col-xs-6 text-right texto">
-                © 2017 CORE v.2.0.7.
+                © 2017 CORE v.2.0.9.
             </div>
         </div>
     </div>
@@ -176,12 +176,11 @@
 <script src="{{ asset('js/proveedores.js?v=1.0.1') }}"></script>
 <script src="{{ asset('js/pacientes.js?v=1.0.2') }}"></script>
 <script src="{{ asset('js/medicos.js?v=1.0.2') }}"></script>
-<script src="{{ asset('js/ingresos.js?v=1.0.5') }}"></script>
-<script src="{{ asset('js/citas.js?v=1.0.24') }}"></script>
+<script src="{{ asset('js/ingresos.js?v=1.0.12') }}"></script>
 <script src="{{ asset('sweetalert/sweetalert.min.js') }}"></script>
 
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
   $( function() {
       var date = new Date();
@@ -202,7 +201,7 @@
       });
 
   } );
-</script>
+</script> -->
 
 
 <!-- Full calendar -->

@@ -94,15 +94,15 @@ class IngresoController extends Controller
     {
         $ingresos = Ingreso::findOrFail($id);
 
-        $pacientes = DB::table('pacientes')
+        $paciente = DB::table('pacientes')
                         ->select('id', 'nombres', 'apellidos')
+                        ->where('id', '=', $ingresos['idPaciente'])
                         ->get();
-
         $medicos = DB::table('medicos')
                         ->select('id', 'nombres', 'apellidos')
                         ->get();
 
-        return view($this->path.'.edit', compact('ingresos', 'pacientes', 'medicos'));
+        return view($this->path.'.edit', compact('ingresos', 'paciente', 'medicos'));
     }
 
     /**

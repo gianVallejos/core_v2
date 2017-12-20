@@ -142,4 +142,11 @@ class WsCoreController extends Controller
       $agendas = DB::select('call obtenerTodasCitas()');
       print(json_encode($agendas));
     }
+
+    public function obtenerTratamientosByPaciente($idPaciente){
+        $sql = 'call obtenerTratamientosByPacienteId('. $idPaciente .')';
+        $ac = DB::select($sql);
+
+        print(json_encode($ac));
+    }
 }

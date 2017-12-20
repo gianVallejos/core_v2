@@ -77,3 +77,5 @@ Route::get('api-v1/buscar-ingresos/', 'WsCoreController@buscarIngresos')->name('
 Route::get('api-v1/editar-cita/', 'WsCoreController@editarCita')->name('editarCitas');
 
 Route::get('api-v1/obtener-todas-cita/', 'WsCoreController@obtenerTodasCitas')->name('obtenerTodasCitas');
+
+Route::get('api-v1/obtener-tratamientos-id-paciente/{idPaciente}', 'WsCoreController@obtenerTratamientosByPaciente')->name('obtenerTratamientosIdPaciente');
