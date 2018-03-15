@@ -57,30 +57,37 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-            $paciente = new Paciente();
-            $paciente->nombres = $request->nombres;
-            $paciente->apellidos = $request->apellidos;
-            $paciente->dni = $request->dni;
-            $paciente->email = $request->email;
-            $paciente->direccion = $request->direccion;
-            $paciente->fechanacimiento = $request->fechanacimiento;
-            $paciente->genero = $request->genero;
-            $paciente->estado = $request->estado;
-            $paciente->telefono = $request->telefono;
-            $paciente->fax = $request->fax;
-            $paciente->celular = $request->celular;
-            $paciente->celular_aux = $request->celular_aux;
-            $paciente->empresa_id = $request->empresa_id;
-            $paciente->seguro_ind = $request->seguro_ind;
-            $paciente->save();
+        //Revisar que el DNI no sea duplicado
+        $pac = DB::select('call getNumeroDniPaciente('. $request->dni .')');
+        if( !empty($pac) ){
+          alert()->error('El paciente ya existe. DNI Repetido', 'Error');
+        }else{
+          try{
+              $paciente = new Paciente();
+              $paciente->nombres = $request->nombres;
+              $paciente->apellidos = $request->apellidos;
+              $paciente->dni = $request->dni;
+              $paciente->email = $request->email;
+              $paciente->direccion = $request->direccion;
+              $paciente->fechanacimiento = $request->fechanacimiento;
+              $paciente->genero = $request->genero;
+              $paciente->estado = $request->estado;
+              $paciente->telefono = $request->telefono;
+              $paciente->fax = $request->fax;
+              $paciente->celular = $request->celular;
+              $paciente->celular_aux = $request->celular_aux;
+              $paciente->empresa_id = $request->empresa_id;
+              $paciente->seguro_ind = $request->seguro_ind;
+              $paciente->nombre_apoderado = $request->nombre_apoderado;
+              $paciente->celular_apoderado = $request->celular_apoderado;
+              $paciente->save();
 
-            alert()->success('Paciente agregado correctamente', 'Agregado' );
-            return redirect()->route('pacienteindex');
-        }catch(Exception $e){
-            return "Fatal error - " . $e->getMessage();
+              alert()->success('Paciente agregado correctamente', 'Agregado' );
+          }catch(Exception $e){
+              return "Fatal error - " . $e->getMessage();
+          }
         }
-
+        return redirect()->route('pacienteindex');
     }
 
     /**
@@ -120,6 +127,9 @@ class PacienteController extends Controller
      */
     public function update(Request $request, $id)
     {
+      if( !empty($pac) ){
+        alert()->error('El paciente ya existe. DNI Repetido', 'Error');
+      }else{
         $paciente = Paciente::findOrFail($id);
         $paciente->nombres = $request->nombres;
         $paciente->apellidos = $request->apellidos;
@@ -135,11 +145,13 @@ class PacienteController extends Controller
         $paciente->celular_aux = $request->celular_aux;
         $paciente->empresa_id = $request->empresa_id;
         $paciente->seguro_ind = $request->seguro_ind;
+        $paciente->nombre_apoderado = $request->nombre_apoderado;
+        $paciente->celular_apoderado = $request->celular_apoderado;
         $paciente->save();
 
         alert()->success('Paciente modificado correctamente', 'Modificado' );
-
-        return redirect()->route('pacienteindex');
+      }
+      return redirect()->route('pacienteindex');
     }
 
     /**
@@ -153,6 +165,7 @@ class PacienteController extends Controller
       try{
         $paciente = Paciente::findOrFail($id);
         $paciente->delete();
+        $res = DB::select('ALTER TABLE pacientes auto_increment = 1');
 
         alert()->error('Paciente eliminado correctamente', 'Eliminado' );
 

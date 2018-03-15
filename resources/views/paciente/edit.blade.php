@@ -213,6 +213,42 @@
                         </div>
 
                         <div class="form-group">
+
+                            <div class="col-md-2 col-xs-2 col-md-offset-3 checkbox-content">
+                                <div class="form-check">
+                                  <input id="active-monto" type="checkbox" name="active-monto" {{ $paciente->nombre_apoderado == '' ? '' : 'checked' }}>
+                                  <label for="active-monto" class="form-check-label"> Apoderado</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 col-xs-2">
+                                <input id="nombre_apoderado" type="text" class="form-control" name="nombre_apoderado" value="{{ $paciente->nombre_apoderado }}"
+                                       placeholder="Nombre Apoderado" {{ $paciente->nombre_apoderado == '' ? 'readonly' : '' }}>
+
+                                @if ($errors->has('nombre_apoderado'))
+                                    <span class="help-block">
+                                  <strong>{{ $errors->first('nombre_apoderado')}}</strong>
+                              </span>
+                                @endif
+
+                            </div>
+
+                            <div class="col-md-2 col-xs-2">
+                                <input id="celular_apoderado" type="text" class="form-control" name="celular_apoderado"
+                                       value="{{ $paciente->celular_apoderado }}" placeholder="Celular Apoderado" {{ $paciente->nombre_apoderado == '' ? 'readonly' : '' }}>
+
+                                @if ($errors->has('celular_apoderado'))
+                                    <span class="help-block">
+                                  <strong>{{ $errors->first('celular_apoderado')}}</strong>
+                              </span>
+                                @endif
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
                             <div class="col-md-12 text-center" style="padding-top: 25px;">
                                 <button type="submit" class="btn-core">
                                     Editar

@@ -5,18 +5,18 @@
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-12">
 
                 <div class="panel panel-default">
                     <div class="panel-heading text-center title">AGREGAR INGRESO</div>
                     <div class="panel-body">
 
-                        <form class="form-horizontal" action="/core_v2/ingresos" method="POST">
+                        <form class="form-horizontal" name="myForm" action="/core_v2/ingresos" method="POST" onsubmit="return validateForm()">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="form-group">
-                                <label for="paciente_id" class="col-md-1 col-xs-1 control-label">Paciente</label>
-                                <div class="col-md-3 col-xs-3">
+                                <div class="col-md-5 col-xs-5">
+                                    <label for="paciente_id" class="control-label">Paciente</label>
                                     <input type="hidden" name="paciente_id" id="paciente_id">
                                     <input name="paciente_nombre" id="paciente_nombre" class="form-control" placeholder="Paciente" disabled>
 
@@ -26,12 +26,14 @@
                                   </span>
                                     @endif
                                 </div>
-                                <div class="col-md-1 col-xs-1">
-                                  <button id="openBuscarPaciente" class="btn btn-default buscarPaciente" type="button">...</button>
+                                <div class="col-md-1 col-xs-1" style="margin-left: -20px; padding-top: 28px;">
+                                  <button id="openBuscarPaciente" class="btn btn-default buscarPaciente" type="button">
+                                    Agregar
+                                  </button>
                                 </div>
 
-                                <label for="doctor_id" class="col-md-1 col-xs-1 control-label">Doctor</label>
-                                <div class="col-md-3 col-xs-3">
+                                <div class="col-md-4 col-xs-4">
+                                    <label for="doctor_id" class="control-label">Doctor</label>
                                     <select name="doctor_id" id="doctor_id" class="form-control">
                                         @foreach( $medicos as $stdo )
                                             <option value="{{ $stdo->id }}"
@@ -47,24 +49,27 @@
 
                                 </div>
 
-                                <label for="fecha" class="col-md-1 col-xs-1 control-label">Fecha</label>
                                 <div class="col-md-2 col-xs-2">
-                                    <input type="date" id="fecha" name="fecha" value="<?php echo date('Y-m-d'); ?>" class="form-control" required>
+                                  <label for="fecha" class="control-label">Fecha</label>
+                                  <input type="date" id="fecha" name="fecha" value="<?php echo date('Y-m-d'); ?>" class="form-control" required>
 
-                                    @if ($errors->has('fecha'))
-                                        <span class="help-block">
-                                      <strong>{{ $errors->first('fecha')}}</strong>
+                                  @if ($errors->has('fecha'))
+                                  <span class="help-block">
+                                    <strong>{{ $errors->first('fecha')}}</strong>
                                   </span>
-                                    @endif
+                                  @endif
 
                                 </div>
+
 
                             </div>
 
                             <div class="form-group">
 
-                                <label for="tratamiento" class="col-md-1 col-xs-1 control-label">Tratamiento</label>
-                                <div class="col-md-4 col-xs-8">
+
+
+                                <div class="col-md-5 col-xs-5">
+                                    <label for="tratamiento" class="control-label">Tratamiento</label>
                                     <input id="tratamiento_id" type="hidden" name="tratamiento_id">
                                     <input id="tratamiento" type="text" class="form-control" name="tratamiento"
                                            placeholder="Tratamiento" readonly>
@@ -75,12 +80,12 @@
                                   </span>
                                     @endif
                                 </div>
-                                <div class="col-md-1 col-xs-1">
-                                  <button id="openBuscarTratamiento" class="btn btn-default buscarPaciente" type="button">...</button>
+                                <div class="col-md-1 col-xs-1" style="margin-left: -20px; padding-top: 28px;">
+                                  <button id="openBuscarTratamiento" class="btn btn-default buscarPaciente" type="button">Agregar</button>
                                 </div>
 
-                                <label for="cantidad" class="col-md-1 col-xs-1 control-label">Cantidad</label>
-                                <div class="col-md-2 col-xs-2">
+                                <div class="col-md-1 col-xs-2">
+                                    <label for="cantidad" class="control-label">Cantidad</label>
                                     <input id="cantidad" type="number" class="form-control" name="cantidad"
                                            value="1" placeholder="Cantidad" min="1" step="1" required>
 
@@ -92,10 +97,28 @@
 
                                 </div>
 
-                                <label for="monto" class="col-md-1 col-xs-1 control-label">Monto</label>
                                 <div class="col-md-2 col-xs-2">
+                                    <label for="monto" class="control-label">Monto Unit.</label>
                                     <input id="monto" type="number" class="form-control" name="monto"
-                                           placeholder="Monto" min="0" step=".1" readonly>
+                                           placeholder="Monto Unit." min="0" step=".1" value="0" readonly>
+
+                                    @if ($errors->has('monto'))
+                                        <span class="help-block">
+                                      <strong>{{ $errors->first('monto')}}</strong>
+                                  </span>
+                                    @endif
+
+                                </div>
+
+                                <div class="col-md-1 col-xs-1" style="padding-top: 31px;
+    margin-left: -10px; font-size: 13px;">
+                                    <input id="active-monto" type="checkbox" name="active-monto"> Activar
+                                </div>
+
+                                <div class="col-md-2 col-xs-2">
+                                    <label for="total" class="control-label">Total</label>
+                                    <input id="total" type="number" class="form-control" name="total"
+                                           placeholder="Total" min="0" step=".1" readonly>
 
                                     @if ($errors->has('monto'))
                                         <span class="help-block">
@@ -134,23 +157,23 @@
                         <div class="panel-body" style="padding-bottom: 60px;">
 
                             <div class="row" style="padding-bottom: 14px;">
-                                <div class="col-md-1 col-md-offset-1" style="padding-top: 5px;">
+                                <div class="col-md-1" style="padding-top: 5px;">
                                     <strong>BUSCAR:</strong>
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-11">
 
                                     <div class="row">
                                         <form id="form-buscar-ingreso" method="get">
                                         <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
-                                            <div class="col-md-3 col-xs-4">
+                                            <div class="col-md-3 col-xs-3">
                                                 <input id="date_inicio" type="date" name="date_inicio" value=""
                                                        class="form-control">
                                             </div>
-                                            <div class="col-md-3 col-xs-4">
+                                            <div class="col-md-3 col-xs-3">
                                                 <input id="date_fin" type="date" name="date_fin" value=""
                                                        class="form-control">
                                             </div>
-                                            <div class="col-md-3 col-xs-4">
+                                            <div class="col-md-3 col-xs-3">
                                                 <select name="doctor_id" id="doctor_id" class="form-control">
                                                     <option value="-1" selected>Todos los Doctores</option>
                                                     @foreach( $medicos as $stdo )
@@ -159,10 +182,10 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-1 col-xs-4">
+                                            <div class="col-md-1 col-xs-1">
                                                 <button type="submit" name="button" class="btn-core">Buscar</button>
                                             </div>
-                                            <div class="col-md-1 text-center">
+                                            <div class="col-md-1 col-xs-1 text-center">
                                                 <button id="print-pagos" class="btn-core" type="button" name="button">Imprimir</button>
                                             </div>
                                         </form>
@@ -171,9 +194,9 @@
                                 </div>
                             </div>
 
-                        <div id="print-pagos-div">
                             <div id="table-wrapper">
-                                <!-- <div id="table-scroll"> -->
+                                <div id="table-scroll">
+                                  <div id="print-pagos-div">
                                     <table id="tablaIngresos" class="table table-responsive table-hover">
                                         <thead>
                                           <tr>
@@ -240,9 +263,11 @@
                                         </tbody>
 
                                     </table>
-                                <!-- </div> -->
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row">
+                            <div class="row" style="padding-top: 19px; padding-right: 24px;">
                                 <div class="col-md-9"></div>
                                 <div class="col-md-1 print-ignore text-right">
                                   <label for="">Total: </label>
@@ -259,7 +284,7 @@
                                   <div id="mcore-footer"><?php echo 'S/' . $mcore; ?></div>
                                 </div>
                             </div>
-                      </div>
+
                         </div>
                     </div>
                 </div>
@@ -426,6 +451,7 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/printThis.js?v=1.0.0') }}"></script>
 <script type="text/javascript">
+
   function buscarPaciente() {
       var input, filter, table, tr, td, i;
       input = document.getElementById("buscar-paciente");
@@ -464,10 +490,27 @@
       }
   }
 
+  function validateForm(){
+      const $paciente = document.forms["myForm"]["paciente_id"].value;
+      const $tratamiento = document.forms["myForm"]["tratamiento_id"].value;
+
+      if( $paciente == '' ){
+          swal('Alerta', 'Debe seleccionar un paciente', 'warning');
+          return false;
+      }
+
+      if( $tratamiento == '' ){
+        swal('Alerta', 'Debe seleccionar un tratamiento', 'warning');
+        return false;
+      }
+  }
+
   $(document).ready(function(){
       $('#print-pagos').click(function(){
+          const $m_doctor = $('#mdoc-footer').text();
+
           $('#print-pagos-div').printThis({
-              header: "<h3>Ingresos CORE</h3>",
+              header: "<h3>Ingresos CORE</h3><br><br><strong>Monto Doc. Total: </strong>"+ $m_doctor,
               loadCSS: "http://localhost/core_v2/css/print-report.css?v=1.0.3"
           });
       });

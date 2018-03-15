@@ -95,7 +95,7 @@ function agregarATabla(data, table_id){
         mcore += parseFloat(montoCore);
         mtotal += parseFloat(montoTotal);
     }
-    
+
     $('#mtotal-footer').text(round(mtotal));
     $('#mdoc-footer').text(round(mdoc));
     $('#mcore-footer').text(round(mcore));
@@ -181,7 +181,8 @@ function agregarTratamientoADOM(id, detalle, monto){
 
     $('#tratamiento_id').val(id);
     $('#tratamiento').val(detalle);
-    $('#monto').val(calcularMontoCantidad());
+    $('#monto').val(monto);
+    $('#total').val(calcularMontoTotal());
 
     $('#buscarTratamiento').modal('hide');
 }
@@ -199,33 +200,53 @@ $('#openBuscarTratamiento').on('click', function(){
     }
 });
 
-$('#cantidad').on('change', function(){
+$('#total').val(calcularMontoTotal());
+
+$('#cantidad').on('focusout', function(){
     let val = $('#cantidad').val();
     if( val == '' ){
         $('#cantidad').val('1');
     }
 
-    $('#monto').val(calcularMontoCantidad());
+    $('#total').val(calcularMontoTotal());
 });
 
-function getMontoActual(){
-    let val = parseFloat($('#cantidad').val());
-    if( monto_actual == -1 && !isNaN($('#monto').val()) ){
-        monto_actual = parseFloat($('#monto').val() / val);
-    }
-    // alert(monto_actual);
-}
-getMontoActual();
-
-function calcularMontoCantidad(){
-    let val = parseFloat($('#cantidad').val());
-
-    let monto = parseFloat(monto_actual);
-
-    if( !isNaN(monto) ){ //Existe monto
-        let total = val * monto;
-        return total;
+$('#monto').on('focusout', () => {
+    let monto = $('#monto').val();
+    if( monto == '' ){
+        $('#monto').val('0');
     }
 
-    return '';
+    $('#total').val(calcularMontoTotal());
+});
+
+$('#cantidad').on('keyup', function(){
+    $('#total').val(calcularMontoTotal());
+});
+
+$('#monto').on('keyup', () => {
+    $('#total').val(calcularMontoTotal());
+});
+
+function calcularMontoTotal(){
+    let val = parseFloat($('#cantidad').val());
+    let monto_unit = parseFloat($('#monto').val());
+
+    return val * monto_unit;
 }
+
+const $checkbox = document.querySelector('input[name=active-monto]');
+const $monto = document.getElementById('monto');
+console.log($checkbox);
+$checkbox.addEventListener('change', (event) => {
+    if( $checkbox.checked ){
+      $monto.readOnly = false;
+    }else{
+      $monto.readOnly = true;
+    }
+    $monto.focus();
+});
+
+$monto.addEventListener('keyup', (event) => {
+
+});

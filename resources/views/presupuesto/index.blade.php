@@ -10,7 +10,7 @@
                     <div class="panel-heading text-center title">CREAR PRESUPUESTO</div>
                     <div class="panel-body" style="padding-bottom: 45px; padding-top: 65px;">
                         <div class="form-group">
-                            <label for="medicos" class="col-md-2 col-xs-2 col-md-offset-1 control-label lbl">Seleccionar
+                            <label for="medicos" class="col-md-2 col-xs-2 control-label lbl">Seleccionar
                                 Doctor</label>
                             <div class="col-md-3 col-xs-4">
                                 <select class="form-control" id="medico" name="medico">
@@ -24,12 +24,14 @@
                             <label for="medicos" class="col-md-2 col-xs-2 control-label lbl">Seleccionar
                                 Paciente</label>
                             <div class="col-md-3 col-xs-4">
-                                <select class="form-control" id="paciente" name="paciente">
-                                    <option value="-1">Seleccionar Pacientes</option>
-                                    @foreach($pacientes as $paciente)
-                                        <option value="{{$paciente->id}}">{{$paciente->nombres}} {{$paciente->apellidos}}</option>
-                                    @endforeach
-                                </select>
+                              <input class="form-control" type="text" id="paciente" name="paciente" disabled>
+                              <input type="hidden" id="paciente-id">
+                            </div>
+
+                            <div class="col-md-2">
+                              <button id="openBuscarPaciente" class="btn btn-default" type="button">
+                                Buscar
+                              </button>
                             </div>
                         </div>
 
@@ -116,6 +118,63 @@
         </div>
     </div>
 
+    <!-- Modal Buscar Paciente -->
+        <div id="buscarPaciente" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title text-center"><b>BUSCAR PACIENTE</b></h4>
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-md-10 col-md-offset-1"> <!-- Buscar Paciente -->
+                            <input type="text" class="form-control" id="buscar-paciente" onkeyup="buscarPaciente()"
+                                   placeholder=" Buscar por Nombres">
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div id="table-wrapper">
+                            <div id="table-scroll" style="height: 50vh;">
+                                <table id="tablaClte" class="table table-responsive table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">HC</th>
+                                        <th class="text-center">Nombres</th>
+                                        <th></th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php $i = 1; ?>
+                                    @foreach( $pacientes as $row )
+                                        <tr>
+                                            <td class="text-center">{{ $row->id }}</td>
+                                            <td class="text-center">{{ $row->nombres }} {{ $row->apellidos }}</td>
+                                            <td class="text-center">
+                                                <button class="btn btn-xs btn-info"
+                                                        onclick="agregarAPrespPaciente('{{ $row->id }}', '{{ $row->nombres }} {{ $row->apellidos }}')">
+                                                    Aceptar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <?php $i++; ?>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer text-center" style="width: 100%;">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
 @endsection
 <script src="{{ asset('js/app.js') }}"></script>
 <script type="text/javascript">
@@ -137,4 +196,24 @@
             }
         }
     }
+
+    function buscarPaciente() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("buscar-paciente");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("tablaClte");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
 </script>

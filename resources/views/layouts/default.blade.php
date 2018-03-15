@@ -23,10 +23,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css?v=1.0.0') }}" rel="stylesheet">
-    <link href="{{ asset('css/core.css?v=2.0.28') }}" rel="stylesheet">
+    <link href="{{ asset('css/core.css?v=2.0.30') }}" rel="stylesheet">
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('css/table.css?v=1.0.1') }}" rel="stylesheet">
     <link href="{{ asset('sweetalert/sweetalert.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/ingresos.css?v=1.0.1') }}" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" media="print" href="{{ asset('css/print.css?v=1.0.3') }}">
 
@@ -101,6 +102,7 @@
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/core_v2/{{ 'ingresos' }}">Ingresos</a></li>
+                                <li><a href="/core_v2/{{ 'egresos' }}">Egresos</a></li>
                             </ul>
 
                         </li>
@@ -162,7 +164,7 @@
                 Developed by <a href="http://www.gvallejos.com" class="link" target="_blank" style="color: #87B0FF;">gVallejos.com</a>
             </div>
             <div class="col-md-6 col-xs-6 text-right texto">
-                © 2017 CORE v.2.0.9.
+                © 2017 CORE v.2.0.12.
             </div>
         </div>
     </div>
@@ -171,12 +173,13 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/printThis.js?v=1.0.3') }}"></script>
-<script src="{{ asset('js/presupuesto.js?v=1.0.6') }}"></script>
+<script src="{{ asset('js/presupuesto.js?v=1.0.10') }}"></script>
 <script src="{{ asset('js/precios.js?v=1') }}"></script>
 <script src="{{ asset('js/proveedores.js?v=1.0.1') }}"></script>
-<script src="{{ asset('js/pacientes.js?v=1.0.2') }}"></script>
+<script src="{{ asset('js/pacientes.js?v=1.0.4') }}"></script>
 <script src="{{ asset('js/medicos.js?v=1.0.2') }}"></script>
-<script src="{{ asset('js/ingresos.js?v=1.0.12') }}"></script>
+<script src="{{ asset('js/ingresos.js?v=1.0.14') }}"></script>
+<script src="{{ asset('js/egresos.js?v=1.0.2') }}"></script>
 <script src="{{ asset('sweetalert/sweetalert.min.js') }}"></script>
 
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->

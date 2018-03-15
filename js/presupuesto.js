@@ -19,10 +19,10 @@ function alertAutoMessage(titulo, texto, tipo, time){
 
 $('#nuevo-presupuesto').click(function(){
     var idDoctorSel = $('#medico option:selected').val();
-    var idPacienteSel = $('#paciente option:selected').val();
+    var idPacienteSel = $('#paciente-id').val();
     if( idDoctorSel == '-1' ){
         alertMessage('','Debes seleccionar un doctor', 'warning');
-    }else if( idPacienteSel == '-1' ){
+    }else if( idPacienteSel == '' ){
         alertMessage('', 'Debes seleccionar un paciente', 'warning');
     }else{
         url = "/core_v2/presupuestos/create/" + idDoctorSel + '/' + idPacienteSel;
@@ -34,11 +34,20 @@ $('#nuevo-presupuesto').click(function(){
     }
 });
 
+
+function agregarAPrespPaciente(hc, paciente){
+    $('#paciente').val(paciente);
+    $('#paciente-id').val(hc);
+    $('#buscarPaciente').modal('hide');
+}
+
+$('#openBuscarPaciente').on('click', function(){
+    $('#buscarPaciente').modal('show');
+    $('#buscar-paciente').focusin();
+});
+
 $(document).ready(function(){
     $('.dropdown-toggle').dropdown();
-
-
-
 });
 
 function round(num){

@@ -15,8 +15,8 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group">
-                            <label for="paciente_id" class="col-md-1 col-xs-1 control-label">Paciente</label>
-                            <div class="col-md-3 col-xs-3">
+                            <div class="col-md-4 col-md-offset-1 col-xs-4">
+                              <label for="paciente_id" class="control-label">Paciente</label>
                               <input type="hidden" name="paciente_id" id="paciente_id" value="{{ $paciente[0]->id }}">
                               <input name="paciente_nombre" id="paciente_nombre" class="form-control" value="{{ $paciente[0]->nombres }} {{ $paciente[0]->apellidos }}" disabled>
 
@@ -28,8 +28,8 @@
 
                             </div>
 
-                            <label for="doctor_id" class="col-md-1 col-xs-1 control-label">Doctor</label>
-                            <div class="col-md-3 col-xs-3">
+                            <div class="col-md-4 col-xs-4">
+                                <label for="doctor_id" class="control-label">Doctor</label>
                                 <select name="doctor_id" id="doctor_id" class="form-control">
                                     @foreach( $medicos as $stdo )
                                         <option value="{{ $stdo->id }}" {{ $ingresos->idMedico == $stdo->id ? 'selected="selected"' : '' }}>{{ $stdo->apellidos }} {{ $stdo->nombres }}</option>
@@ -44,8 +44,8 @@
 
                             </div>
 
-                            <label for="fecha" class="col-md-1 col-xs-1 control-label">Fecha</label>
                             <div class="col-md-2 col-xs-2">
+                                <label for="fecha" class="control-label">Fecha</label>
                                 <input type="date" id="fecha" name="fecha" class="form-control" value="{{ $ingresos->fecha }}" required>
 
                                 @if ($errors->has('fecha'))
@@ -60,8 +60,8 @@
 
                         <div class="form-group">
 
-                            <label for="tratamiento" class="col-md-1 col-xs-1 control-label">Tratamiento</label>
-                            <div class="col-md-4 col-xs-8">
+                            <div class="col-md-5 col-md-offset-1 col-xs-5">
+                                <label for="tratamiento" class="control-label">Tratamiento</label>
                                 <input id="tratamiento" type="text" class="form-control" name="tratamiento"
                                        value="{{ $ingresos->tratamiento }}" placeholder="Tratamiento" readonly>
 
@@ -73,8 +73,8 @@
 
                             </div>
 
-                            <label for="cantidad" class="col-md-1 col-xs-1 control-label">Cantidad</label>
-                            <div class="col-md-2 col-xs-2">
+                            <div class="col-md-1 col-xs-1">
+                                <label for="cantidad" class="control-label">Cantidad</label>
                                 <input id="cantidad" type="number" class="form-control" name="cantidad"
                                        value="{{ $ingresos->cantidad }}" placeholder="Cantidad" min="1" step="1" required>
 
@@ -86,10 +86,23 @@
 
                             </div>
 
-                            <label for="monto" class="col-md-1 col-xs-1 control-label">Monto</label>
                             <div class="col-md-2 col-xs-2">
+                                <label for="monto" class="control-label">Monto</label>
                                 <input id="monto" type="number" class="form-control" name="monto"
                                        value="{{ $ingresos->monto }}" placeholder="Monto" min="0" step=".1" readonly>
+
+                                @if ($errors->has('monto'))
+                                    <span class="help-block">
+                                  <strong>{{ $errors->first('monto')}}</strong>
+                              </span>
+                                @endif
+
+                            </div>
+
+                            <div class="col-md-2 col-xs-2">
+                                <label for="total" class="control-label">Total</label>
+                                <input id="total" type="number" class="form-control" name="total"
+                                       placeholder="Total" min="0" step=".1" readonly>
 
                                 @if ($errors->has('monto'))
                                     <span class="help-block">

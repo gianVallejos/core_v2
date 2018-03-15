@@ -55,6 +55,10 @@ Route::get('agenda', 'AgendaController@index')->name('agendaindex');
 Route::resource('ingresos', 'IngresoController');
 Route::get('ingreso', 'IngresoController@index')->name('ingresoindex');
 
+// Pagos (Egreso)
+Route::resource('egresos', 'EgresoController');
+Route::get('egreso', 'EgresoController@index')->name('egresoindex');
+
 // Ws Routes
 Route::get('api-v1/update-precios/{idEmpresa}/{idTratamiento}/{monto}/{token}', 'WsCoreController@updatePrecios')->name('updatePrecios');
 
@@ -73,6 +77,7 @@ Route::get('api-v1/agregar-detalle-proveedor/', 'WsCoreController@agregarDetalle
 Route::get('api-v1/eliminar-detalle-proveedor/{idDProveedor}', 'WsCoreController@eliminarDetalleProveedor')->name('eliminarDetalleProveedor');
 
 Route::get('api-v1/buscar-ingresos/', 'WsCoreController@buscarIngresos')->name('agregarIngresos');
+Route::get('api-v1/buscar-egresos/', 'WsCoreController@buscarEgresos')->name('buscarEgresos');
 
 Route::get('api-v1/editar-cita/', 'WsCoreController@editarCita')->name('editarCitas');
 

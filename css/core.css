@@ -19,6 +19,10 @@ footer{
     padding-top: 5px;
 }
 
+.inline{
+    display: inline-block;
+}
+
 /*-------------------- CORE STYLE --------------------- */
 .title{
     font-family: 'Poppins', sans-serif;
@@ -343,4 +347,14 @@ table.table{
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+
+/* Pacientes */
+.checkbox-content{
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
 }

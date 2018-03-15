@@ -25,6 +25,8 @@ function mostrarDetallePaciente(php_data){
   $('#fax-txt').text(data["fax"]);
   $('#celular-txt').text(data["celular"]);
   $('#celular_aux-txt').text(data["celular_aux"]);
+  $('#nombre-apoderado-txt').text(data["nombre_apoderado"]);
+  $('#celular-apoderado-txt').text(data["celular_apoderado"]);
 }
 function buscarClte(){
       var input, filter, table, tr, td, i;
@@ -44,3 +46,21 @@ function buscarClte(){
           }
       }
   }
+
+  $apoderado = document.getElementById('active-monto');
+  $nombre_apoderado = document.getElementById('nombre_apoderado');
+  $celular_apoderado = document.getElementById('celular_apoderado');
+
+  function apoderadoToggle(){
+    if( $apoderado.checked ){
+        $nombre_apoderado.readOnly = false;
+        $celular_apoderado.readOnly = false;
+        $nombre_apoderado.focus();
+    }else{
+        $nombre_apoderado.readOnly = true;
+        $celular_apoderado.readOnly = true;
+    }
+  }
+  $apoderado.addEventListener('click', () => {
+     apoderadoToggle();
+  })

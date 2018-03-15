@@ -2,9 +2,8 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-
             <div class="col-md-12">
 
                 <div class="panel panel-default">
@@ -44,7 +43,7 @@
                                 <label for="dni" class="col-md-1 col-xs-1 control-label">DNI</label>
                                 <div class="col-md-2 col-xs-2">
                                     <input id="dni" type="text" class="form-control" name="dni" value="{{ old('dni')}}"
-                                           placeholder="DNI" minlength="8" maxlength="8">
+                                           placeholder="DNI" minlength="8" maxlength="8" required>
 
                                     @if ($errors->has('dni'))
                                         <span class="help-block">
@@ -223,6 +222,42 @@
                             </div>
 
                             <div class="form-group">
+
+                                <div class="col-md-2 col-xs-2 col-md-offset-3 checkbox-content">
+                                    <div class="form-check">
+                                      <input id="active-monto" type="checkbox" name="active-monto">
+                                      <label for="active-monto" class="form-check-label"> Apoderado</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2 col-xs-2">
+                                    <input id="nombre_apoderado" type="text" class="form-control" name="nombre_apoderado" value="{{ old('nombre_apoderado')}}"
+                                           placeholder="Nombre Apoderado" readonly>
+
+                                    @if ($errors->has('nombre_apoderado'))
+                                        <span class="help-block">
+                                      <strong>{{ $errors->first('nombre_apoderado')}}</strong>
+                                  </span>
+                                    @endif
+
+                                </div>
+
+                                <div class="col-md-2 col-xs-2">
+                                    <input id="celular_apoderado" type="text" class="form-control" name="celular_apoderado"
+                                           value="{{ old('celular_apoderado')}}" placeholder="Celular Apoderado" readonly>
+
+                                    @if ($errors->has('celular_apoderado'))
+                                        <span class="help-block">
+                                      <strong>{{ $errors->first('celular_apoderado')}}</strong>
+                                  </span>
+                                    @endif
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
                                 <div class="col-md-12 text-center" style="padding-top: 25px;">
                                     <button type="submit" class="btn-core">
                                         Agregar
@@ -242,7 +277,7 @@
 
 
     @if( $numPacientes != 0 )
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
@@ -338,47 +373,65 @@
 
                         <div class="row">
                             <label for="dni" class="col-md-2 col-md-offset-1 control-label">DNI:</label>
-                            <div id="dni-txt" class="col-md-4"></div>
+                            <div id="dni-txt" class="col-md-8"></div>
                         </div>
                         <div class="row">
                             <label for="mail" class="col-md-2 col-md-offset-1 control-label">E-mail:</label>
-                            <div id="email-txt" class="col-md-4"></div>
+                            <div id="email-txt" class="col-md-8"></div>
                         </div>
                         <div class="row">
                             <label for="direccion" class="col-md-2 col-md-offset-1 control-label">Dirección:</label>
-                            <div id="direccion-txt" class="col-md-9"></div>
+                            <div id="direccion-txt" class="col-md-8"></div>
                         </div>
                         <div class="row">
                             <label for="fechanacimiento"
                                    class="col-md-2 col-md-offset-1 control-label">Nacimiento:</label>
-                            <div id="fechanacimiento-txt" class="col-md-3"></div>
+                            <div id="fechanacimiento-txt" class="col-md-8"></div>
 
-                            <label for="edad" class="col-md-2 control-label">Edad:</label>
-                            <div id="edad-txt" class="col-md-4"></div>
+                        </div>
+                        <div class="row">
+                            <label for="edad" class="col-md-2 col-md-offset-1 control-label">Edad:</label>
+                            <div id="edad-txt" class="col-md-8"></div>
                         </div>
                         <div class="row">
                             <label for="genero" class="col-md-2 col-md-offset-1 control-label">Género:</label>
-                            <div id="genero-txt" class="col-md-2"></div>
-
+                            <div id="genero-txt" class="col-md-8"></div>
+                        </div>
+                        <div class="row">
                             <label for="estado" class="col-md-2 col-md-offset-1 control-label">Estado:</label>
-                            <div id="estado-txt" class="col-md-2"></div>
+                            <div id="estado-txt" class="col-md-8"></div>
                         </div>
                         <div class="row">
 
                             <label for="telefono" class="col-md-2 col-md-offset-1 control-label">Teléfono:</label>
-                            <div id="telefono-txt" class="col-md-2"></div>
+                            <div id="telefono-txt" class="col-md-8"></div>
+                        </div>
 
+                        <div class="row">
                             <label for="fax" class="col-md-2 col-md-offset-1 control-label">Fax:</label>
-                            <div id="fax-txt" class="col-md-2"></div>
+                            <div id="fax-txt" class="col-md-8"></div>
 
                         </div>
                         <div class="row">
 
                             <label for="celular" class="col-md-2 col-md-offset-1 control-label">Celular:</label>
-                            <div id="celular-txt" class="col-md-2"></div>
+                            <div id="celular-txt" class="col-md-8"></div>
+                        </div>
 
+                        <div class="row">
                             <label for="celular_aux" class="col-md-2 col-md-offset-1 control-label">Celular 2:</label>
-                            <div id="celular_aux-txt" class="col-md-2"></div>
+                            <div id="celular_aux-txt" class="col-md-8"></div>
+
+                        </div>
+
+                        <div class="row">
+                            <label for="celular" class="col-md-3 col-md-offset-1 control-label">Nombre Apod:</label>
+                            <div id="nombre-apoderado-txt" class="col-md-7"></div>
+                        </div>
+
+                        <div class="row">
+                            <label for="celular_aux" class="col-md-3 col-md-offset-1 control-label">Celular Apod:</label>
+                            <div id="celular-apoderado-txt" class="col-md-7"></div>
 
                         </div>
 

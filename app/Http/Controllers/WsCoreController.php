@@ -117,6 +117,15 @@ class WsCoreController extends Controller
         print(json_encode($res));
     }
 
+    public function buscarEgresos(Request $request){
+        $date_inicio = $request->input('date_inicio');
+        $date_fin = $request->input('date_fin');
+
+        $res = DB::select('call getSearchEgresosAll("'. $date_inicio .'", "'. $date_fin .'")');
+
+        print(json_encode($res));
+    }
+
     public function editarCita(Request $request){
         $idAgenda = $request->input('idAgenda');
         $hc = $request->input('hc');
